@@ -1,0 +1,155 @@
+openapi: 3.1.0
+info:
+  title: Mathpix Strokes API
+  description: >
+    Mathpix v3/strokes endpoint for digital-ink OCR. Submit raw stroke coordinates (x/y arrays) and
+    receive the same MMD/LaTeX/HTML/data output produced by v3/text. Supports session-scoped tokens
+    for live handwriting capture in browsers and tablets.
+  version: v3
+  contact:
+    name: Mathpix Support
+    url: https://docs.mathpix.com
+    email: support@mathpix.com
+  license:
+    name: Mathpix Terms of Service
+    url: https://mathpix.com/terms-of-service
+servers:
+  - url: https://api.mathpix.com
+    description: Production Server
+security:
+  - AppIdAuth: []
+    AppKeyAuth: []
+tags:
+  - name: Strokes
+    description: Recognize handwritten math and text from stroke coordinates.
+paths:
+  /v3/strokes:
+    post:
+      summary: Process Strokes
+      description: Submit stroke coordinates representing handwriting and receive recognized MMD/LaTeX output.
+      operationId: processStrokes
+      tags:
+        - Strokes
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/ContentTypeHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StrokesRequest'
+      responses:
+        '200':
+          description: Recognition result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StrokesResponse'
+components:
+  securitySchemes:
+    AppIdAuth:
+      type: apiKey
+      in: header
+      name: app_id
+    AppKeyAuth:
+      type: apiKey
+      in: header
+      name: app_key
+  parameters:
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    ContentTypeHeader:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+  schemas:
+    StrokesRequest:
+      type: object
+      required: [strokes]
+      properties:
+        strokes:
+          type: object
+          required: [strokes]
+          properties:
+            strokes:
+              type: object
+              required: [x, y]
+              properties:
+                x:
+                  type: array
+                  description: Array of x-coordinate arrays, one inner array per stroke.
+                  items:
+                    type: array
+                    items:
+                      type: number
+                y:
+                  type: array
+                  description: Array of y-coordinate arrays, one inner array per stroke.
+                  items:
+                    type: array
+                    items:
+                      type: number
+        strokes_session_id:
+          type: string
+          description: Session identifier for client-side digital-ink capture.
+        formats:
+          type: array
+          items:
+            type: string
+            enum: [text, data, html, latex_styled]
+        metadata:
+          type: object
+          additionalProperties: true
+    StrokesResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+        text:
+          type: string
+        latex_styled:
+          type: string
+        confidence:
+          type: number
+          format: float
+        confidence_rate:
+          type: number
+          format: float
+        is_printed:
+          type: boolean
+        is_handwritten:
+          type: boolean
+        auto_rotate_confidence:
+          type: number
+          format: float
+        auto_rotate_degrees:
+          type: integer
+          enum: [0, 90, -90, 180]
+        image_height:
+          type: integer
+        image_width:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        html:
+          type: string
+        version:
+          type: string

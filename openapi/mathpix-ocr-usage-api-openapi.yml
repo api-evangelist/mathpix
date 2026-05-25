@@ -1,0 +1,115 @@
+openapi: 3.1.0
+info:
+  title: Mathpix OCR Usage API
+  description: >
+    Query OCR consumption metrics aggregated by usage type, request signature, or application,
+    over arbitrary timespans. Used to track consumption trends and reconcile billing.
+  version: v3
+  contact:
+    name: Mathpix Support
+    url: https://docs.mathpix.com
+    email: support@mathpix.com
+  license:
+    name: Mathpix Terms of Service
+    url: https://mathpix.com/terms-of-service
+servers:
+  - url: https://api.mathpix.com
+    description: Production Server
+security:
+  - AppIdAuth: []
+    AppKeyAuth: []
+tags:
+  - name: Usage
+    description: Inspect OCR consumption.
+paths:
+  /v3/ocr-usage:
+    get:
+      summary: Query OCR Usage
+      description: Aggregate OCR usage across a time window. Group by usage_type, request_args_hash, or app_id, and pick a timespan such as month, week, day, or hour.
+      operationId: queryOcrUsage
+      tags:
+        - Usage
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - name: from_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+          description: ISO datetime lower bound (inclusive).
+        - name: to_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+          description: ISO datetime upper bound (exclusive).
+        - name: group_by
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [usage_type, request_args_hash, app_id]
+        - name: timespan
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [hour, day, week, month]
+      responses:
+        '200':
+          description: Aggregated usage.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OcrUsageResponse'
+components:
+  securitySchemes:
+    AppIdAuth:
+      type: apiKey
+      in: header
+      name: app_id
+    AppKeyAuth:
+      type: apiKey
+      in: header
+      name: app_key
+  parameters:
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+  schemas:
+    UsageRecord:
+      type: object
+      properties:
+        from_date:
+          type: string
+          format: date-time
+        app_id:
+          type: string
+        group_id:
+          type: string
+        usage_type:
+          type: string
+          description: Service type (e.g. image, image-async, pdf, strokes, conversion).
+        request_args_hash:
+          type: string
+        count:
+          type: integer
+    OcrUsageResponse:
+      type: object
+      properties:
+        ocr_usage:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageRecord'

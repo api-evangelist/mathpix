@@ -1,0 +1,88 @@
+openapi: 3.1.0
+info:
+  title: Mathpix App Tokens API
+  description: >
+    Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call
+    Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued
+    from 30 seconds to 12 hours. Token issuance is free.
+  version: v3
+  contact:
+    name: Mathpix Support
+    url: https://docs.mathpix.com
+    email: support@mathpix.com
+  license:
+    name: Mathpix Terms of Service
+    url: https://mathpix.com/terms-of-service
+servers:
+  - url: https://api.mathpix.com
+    description: Production Server
+security:
+  - AppKeyAuth: []
+tags:
+  - name: App Tokens
+    description: Issue temporary client-side tokens.
+paths:
+  /v3/app-tokens:
+    post:
+      summary: Create An App Token
+      description: Mint a temporary app_token for client-side use. Authenticated with the long-lived app_key only.
+      operationId: createAppToken
+      tags:
+        - App Tokens
+      parameters:
+        - name: app_key
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Long-lived Mathpix application secret.
+        - name: Content-Type
+          in: header
+          required: true
+          schema:
+            type: string
+            default: application/json
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppTokenRequest'
+      responses:
+        '200':
+          description: Token issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppTokenResponse'
+components:
+  securitySchemes:
+    AppKeyAuth:
+      type: apiKey
+      in: header
+      name: app_key
+  schemas:
+    AppTokenRequest:
+      type: object
+      properties:
+        expires:
+          type: integer
+          description: Token lifetime in seconds. Minimum 30, maximum 43200 (12 hours). Default 300.
+          minimum: 30
+          maximum: 43200
+          default: 300
+        include_strokes_session_id:
+          type: boolean
+          description: When true, the response includes a strokes_session_id for digital-ink capture sessions.
+    AppTokenResponse:
+      type: object
+      properties:
+        app_token:
+          type: string
+          description: Short-lived bearer token to send as the app_token header from client code.
+        app_token_expires_at:
+          type: integer
+          description: Unix epoch seconds when the token expires.
+        strokes_session_id:
+          type: string
+          description: Optional session identifier for digital-ink workflows.

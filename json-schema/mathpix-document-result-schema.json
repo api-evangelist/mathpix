@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/mathpix/mathpix-document-result-schema.json",
+  "title": "Mathpix Document OCR Job",
+  "description": "Schema for the job submission and status payloads returned by the /v3/pdf endpoints. Covers job creation, polling status, and per-format conversion progress.",
+  "type": "object",
+  "definitions": {
+    "PdfSubmitResponse": {
+      "type": "object",
+      "required": ["pdf_id"],
+      "properties": {
+        "pdf_id": {
+          "type": "string",
+          "description": "Job identifier used to poll status and download outputs."
+        }
+      }
+    },
+    "PdfStatus": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["received", "loaded", "split", "processing", "completed", "error"]
+        },
+        "num_pages": {"type": "integer"},
+        "percent_done": {"type": "number"},
+        "error": {"type": "string"},
+        "conversion_status": {
+          "type": "object",
+          "description": "Per-format conversion progress map.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": ["processing", "completed", "error"]
+              },
+              "error_info": {"type": "string"}
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "PdfRequest": {
+      "type": "object",
+      "description": "Submission body for POST /v3/pdf.",
+      "properties": {
+        "url": {"type": "string", "format": "uri"},
+        "streaming": {"type": "boolean", "default": false},
+        "metadata": {"type": "object", "additionalProperties": true},
+        "alphabets_allowed": {
+          "type": "object",
+          "additionalProperties": {"type": "boolean"}
+        },
+        "rm_spaces": {"type": "boolean", "default": true},
+        "rm_fonts": {"type": "boolean", "default": false},
+        "idiomatic_eqn_arrays": {"type": "boolean", "default": false},
+        "include_equation_tags": {"type": "boolean"},
+        "include_smiles": {"type": "boolean", "default": true},
+        "include_page_breaks": {"type": "boolean", "default": false},
+        "include_page_info": {"type": "boolean", "default": false},
+        "page_ranges": {"type": "string"},
+        "conversion_formats": {
+          "type": "object",
+          "additionalProperties": {"type": "boolean"}
+        },
+        "conversion_options": {"type": "object", "additionalProperties": true}
+      },
+      "additionalProperties": false
+    }
+  }
+}

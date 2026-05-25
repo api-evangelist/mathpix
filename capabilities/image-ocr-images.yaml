@@ -1,0 +1,84 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mathpix Image OCR API — Images
+  description: 'Mathpix Image OCR API — Images. 1 operation. Lead operation: Process An Image. Self-contained
+    Naftiko capability covering one Mathpix business surface.'
+  tags:
+  - Mathpix
+  - OCR
+  - Images
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    MATHPIX_APP_ID: MATHPIX_APP_ID
+    MATHPIX_APP_KEY: MATHPIX_APP_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: image-ocr-images
+    baseUri: https://api.mathpix.com
+    description: Mathpix Image OCR API — Images business capability. Self-contained, no shared references.
+    resources:
+    - name: v3-text
+      path: /v3/text
+      operations:
+      - name: processimage
+        method: POST
+        description: Process An Image
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: app_key
+      value: '{{env.MATHPIX_APP_KEY}}'
+      placement: header
+      additionalHeaders:
+        app_id: '{{env.MATHPIX_APP_ID}}'
+  exposes:
+  - type: rest
+    namespace: image-ocr-images-rest
+    port: 8080
+    description: REST adapter for Mathpix Image OCR API — Images.
+    resources:
+    - path: /v1/v3/text
+      name: v3-text
+      description: REST surface for v3-text.
+      operations:
+      - method: POST
+        name: processimage
+        description: Process An Image
+        call: image-ocr-images.processimage
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: image-ocr-images-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Mathpix Image OCR API — Images. One tool per consumed operation.
+    tools:
+    - name: mathpix-process-image
+      description: Process An Image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: image-ocr-images.processimage
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

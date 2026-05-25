@@ -1,0 +1,117 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Mathpix
+providerId: mathpix
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+  - OCR
+  - Document Conversion
+description: FOCUS-aligned FinOps definition for the Mathpix Convert API. Usage-based metering by
+  image, page, and conversion. Apps are aggregated under a single account billing surface, with
+  per-app_id and per-usage_type breakdowns available through the OCR Usage API.
+sources:
+  - https://mathpix.com/pricing
+  - https://docs.mathpix.com
+  - https://docs.mathpix.com/reference/ocr-usage
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Mathpix
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Credit
+    - Adjustment
+  primaryUnit: image
+  secondaryUnits:
+    - page
+    - conversion
+    - request
+focusColumns:
+  ServiceName: Mathpix Convert API
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Mathpix
+  PublisherName: Mathpix
+  InvoiceIssuerName: Mathpix
+  PricingCategory: Usage-Based
+  PricingUnit: image
+  BillingCurrency: USD
+meters:
+  - name: image_ocr_requests
+    unit: image
+    aggregation: sum
+    dimensions:
+      - app_id
+      - usage_type
+      - request_args_hash
+    source:
+      api: /v3/ocr-usage
+      group_by: usage_type
+      timespan: hour
+  - name: document_ocr_pages
+    unit: page
+    aggregation: sum
+    dimensions:
+      - app_id
+      - usage_type
+    source:
+      api: /v3/ocr-usage
+      group_by: usage_type
+      timespan: day
+  - name: conversion_requests
+    unit: conversion
+    aggregation: sum
+    dimensions:
+      - app_id
+      - format
+    source:
+      api: /v3/ocr-usage
+      group_by: usage_type
+      timespan: day
+  - name: strokes_requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - app_id
+  - name: batch_images
+    unit: image
+    aggregation: sum
+    dimensions:
+      - app_id
+      - batch_id
+allocation:
+  primaryKey: app_id
+  secondaryKeys:
+    - usage_type
+    - request_args_hash
+  notes: Mathpix recommends issuing distinct app_ids per workload (e.g., snip-web, ingestion-pipeline,
+    notebook-grader) so cost can be allocated cleanly via the OCR Usage API's group_by=app_id mode.
+forecasting:
+  recommendedSignals:
+    - monthly_image_ocr_count
+    - monthly_document_pages
+    - p95_pages_per_pdf
+    - batch_throughput
+  notes: For high-volume forecasts, combine /v3/ocr-usage with batch-level metadata captured at
+    submission time. The Snip Pro $4.99/mo subscription is forecast as a fixed per-user charge.
+optimization:
+  recommendations:
+    - Batch related images via /v3/batch to reduce per-request overhead.
+    - Use page_ranges on /v3/pdf to avoid OCRing pages your workflow does not need.
+    - Cache conversion_id outputs and avoid re-issuing /v3/converter for unchanged MMD inputs.
+    - Mint short-lived app_tokens for client-side capture instead of embedding app_key in client code.

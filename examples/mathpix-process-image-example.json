@@ -1,0 +1,43 @@
+{
+  "operation": "processImage",
+  "method": "POST",
+  "url": "https://api.mathpix.com/v3/text",
+  "headers": {
+    "app_id": "your-app-id",
+    "app_key": "your-app-key",
+    "Content-Type": "application/json"
+  },
+  "request": {
+    "src": "https://mathpix-ocr-examples.s3.amazonaws.com/equation.jpg",
+    "formats": ["text", "data", "html", "latex_styled"],
+    "math_inline_delimiters": ["\\(", "\\)"],
+    "math_display_delimiters": ["\\[", "\\]"],
+    "rm_spaces": true,
+    "include_line_data": true
+  },
+  "response": {
+    "request_id": "ocr_2026_05_25_abc123",
+    "text": "\\( x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} \\)",
+    "latex_styled": "x = \\frac{-b \\pm \\sqrt{b^{2} - 4 a c}}{2 a}",
+    "confidence": 0.9994,
+    "confidence_rate": 0.9999,
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0.001,
+    "auto_rotate_degrees": 0,
+    "image_height": 220,
+    "image_width": 640,
+    "line_data": [
+      {
+        "type": "math",
+        "subtype": "equation",
+        "cnt": [[10, 10], [630, 10], [630, 210], [10, 210]],
+        "included": true,
+        "is_printed": true,
+        "is_handwritten": false,
+        "text": "\\( x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} \\)"
+      }
+    ],
+    "version": "RSK-M114"
+  }
+}

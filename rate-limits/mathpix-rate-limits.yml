@@ -1,0 +1,67 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Mathpix
+providerId: mathpix
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: false
+tags:
+  - OCR
+  - Rate Limiting
+  - Quotas
+description: Documented rate-limit posture for the Mathpix Convert API. Mathpix publishes per-account
+  concurrency limits and recommends polling cadence (one second per five images for v3/batch).
+  Quotas and per-tier rates beyond the headline image price are negotiated per account.
+sources:
+  - https://docs.mathpix.com
+  - https://docs.mathpix.com/reference/post-v3-batch
+  - https://docs.mathpix.com/guides/authentication
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+algorithm: token-bucket
+spendLimits:
+  - tier: Pay-as-you-go
+    creditPurchase: 'topup'
+    monthlyCap: 'account default'
+  - tier: Enterprise / SCS
+    creditPurchase: 'contract'
+    monthlyCap: 'contractual'
+limits:
+  - tier: Pay-as-you-go
+    api: v3/text (Image OCR)
+    concurrency: account-default
+    notes: Per-account concurrency limit. Contact support to raise the cap for sustained throughput.
+  - tier: Pay-as-you-go
+    api: v3/pdf (Document OCR)
+    concurrency: account-default
+    notes: Asynchronous queue; document size and page count influence end-to-end processing time.
+  - tier: Pay-as-you-go
+    api: v3/converter
+    concurrency: account-default
+    notes: Body capped at 10 MB JSON; conversion job runs in background once submitted.
+  - tier: Pay-as-you-go
+    api: v3/batch
+    pollGuidance: 1 second per 5 images
+    notes: Mathpix recommends waiting approximately one second per five images before polling
+      v3/batch/{batch_id}.
+  - tier: Pay-as-you-go
+    api: v3/strokes
+    bodyLimit: 512 KB
+    notes: Request body capped at 512 KB JSON for digital-ink payloads.
+  - tier: Pay-as-you-go
+    api: v3/app-tokens
+    rate: free
+    notes: Token issuance is free. Tokens last 30 seconds to 12 hours; default 5 minutes.
+  - tier: Enterprise / SCS
+    api: All endpoints
+    concurrency: contractual
+    notes: Dedicated infrastructure with custom concurrency, throughput, and SLA terms.
+notes:
+  - Mathpix returns 401 for missing or invalid app_id / app_key headers, and 429 when an account
+    exceeds its concurrency or burst capacity.
+  - Use OCR Usage API (GET /v3/ocr-usage) with group_by=usage_type and timespan=hour to monitor
+    consumption against your account budget.
+  - For real-time client-side capture, mint an app_token via POST /v3/app-tokens and apply the
+    token's expiration as the effective client-side rate window.

@@ -1,0 +1,78 @@
+extends: ["spectral:oas"]
+documentationUrl: https://docs.mathpix.com
+description: >
+  Spectral ruleset enforcing the conventions observed across the Mathpix OpenAPI specs:
+  versioned /v3 base path, dual app_id + app_key API key security, snake_case operation parameters,
+  Title Case operation summaries, and required tags scoped to the API's business surface.
+functions: []
+rules:
+  mathpix-versioned-base-path:
+    description: All Mathpix endpoints must live under /v3 to match docs.mathpix.com routing.
+    severity: error
+    given: $.paths
+    then:
+      function: pattern
+      field: "@key"
+      functionOptions:
+        match: "^/v3(/|$)"
+
+  mathpix-dual-apikey-security:
+    description: Server-side operations must require both app_id and app_key headers (except /v3/app-tokens which only needs app_key).
+    severity: warn
+    given: $.components.securitySchemes
+    then:
+      function: truthy
+
+  mathpix-snake-case-parameters:
+    description: All parameter names use snake_case to match Mathpix request/response field naming.
+    severity: warn
+    given: $.paths[*][*].parameters[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$|^(Content-Type|app_id|app_key|app_token)$"
+
+  mathpix-operation-id-camel-case:
+    description: operationId must be lowerCamelCase (e.g. processImage, downloadDocx).
+    severity: warn
+    given: $.paths[*][*].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  mathpix-title-case-summaries:
+    description: Operation summaries must use Title Case.
+    severity: warn
+    given: $.paths[*][*].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-zA-Z0-9]*)(\\s[A-Z][a-zA-Z0-9]*)*$"
+
+  mathpix-tag-present:
+    description: Every operation must declare at least one tag (Images, Documents, Conversions, Batches, Strokes, App Tokens, Usage).
+    severity: error
+    given: $.paths[*][*]
+    then:
+      field: tags
+      function: truthy
+
+  mathpix-contact-email:
+    description: info.contact must point to support@mathpix.com.
+    severity: info
+    given: $.info.contact
+    then:
+      field: email
+      function: pattern
+      functionOptions:
+        match: "^support@mathpix\\.com$"
+
+  mathpix-production-server:
+    description: servers[] must declare https://api.mathpix.com.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://api\\.mathpix\\.com$"

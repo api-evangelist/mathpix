@@ -1,0 +1,157 @@
+openapi: 3.1.0
+info:
+  title: Mathpix Convert API
+  description: >
+    Transform Mathpix Markdown (MMD) into DOCX, LaTeX (.tex.zip), HTML, PDF, PPTX, plain Markdown,
+    and archived multi-file outputs. Submission is synchronous; status and downloads use the returned
+    conversion_id.
+  version: v3
+  contact:
+    name: Mathpix Support
+    url: https://docs.mathpix.com
+    email: support@mathpix.com
+  license:
+    name: Mathpix Terms of Service
+    url: https://mathpix.com/terms-of-service
+servers:
+  - url: https://api.mathpix.com
+    description: Production Server
+security:
+  - AppIdAuth: []
+    AppKeyAuth: []
+tags:
+  - name: Conversions
+    description: Convert Mathpix Markdown into export formats.
+paths:
+  /v3/converter:
+    post:
+      summary: Convert Mathpix Markdown
+      description: Convert a Mathpix Markdown string into one or more export formats. Returns a conversion_id used to poll status and download outputs.
+      operationId: convertMarkdown
+      tags:
+        - Conversions
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/ContentTypeHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConvertRequest'
+      responses:
+        '200':
+          description: Conversion job accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConvertResponse'
+  /v3/converter/{conversion_id}:
+    get:
+      summary: Get Conversion Status
+      description: Poll the status of a conversion job.
+      operationId: getConversionStatus
+      tags:
+        - Conversions
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - name: conversion_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Conversion status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversionStatus'
+components:
+  securitySchemes:
+    AppIdAuth:
+      type: apiKey
+      in: header
+      name: app_id
+    AppKeyAuth:
+      type: apiKey
+      in: header
+      name: app_key
+  parameters:
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    ContentTypeHeader:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+  schemas:
+    ConvertRequest:
+      type: object
+      required: [mmd]
+      properties:
+        mmd:
+          type: string
+          description: Mathpix Markdown source document. Body capped at 10 MB.
+        formats:
+          type: object
+          description: Output formats to generate.
+          properties:
+            docx:
+              type: boolean
+            'tex.zip':
+              type: boolean
+            html:
+              type: boolean
+            pdf:
+              type: boolean
+            pptx:
+              type: boolean
+            md:
+              type: boolean
+            'latex.pdf':
+              type: boolean
+            'mmd.zip':
+              type: boolean
+            'md.zip':
+              type: boolean
+            'html.zip':
+              type: boolean
+        conversion_options:
+          type: object
+          additionalProperties: true
+        metadata:
+          type: object
+          additionalProperties: true
+    ConvertResponse:
+      type: object
+      properties:
+        conversion_id:
+          type: string
+          description: Identifier used to poll status and download outputs.
+    ConversionStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [processing, completed, error]
+        conversion_status:
+          type: object
+          description: Per-format conversion progress map.
+          additionalProperties:
+            type: object
+            additionalProperties: true

@@ -1,0 +1,342 @@
+openapi: 3.1.0
+info:
+  title: Mathpix Document OCR API
+  description: >
+    Mathpix v3/pdf endpoints for asynchronous document OCR and format conversion. Submit PDFs
+    (and other supported documents) by URL or multipart upload, poll status, and download results
+    in MMD, Markdown, DOCX, LaTeX (.tex.zip), HTML, PPTX, or line-by-line JSON. Includes server-sent
+    event streaming for incremental results.
+  version: v3
+  contact:
+    name: Mathpix Support
+    url: https://docs.mathpix.com
+    email: support@mathpix.com
+  license:
+    name: Mathpix Terms of Service
+    url: https://mathpix.com/terms-of-service
+servers:
+  - url: https://api.mathpix.com
+    description: Production Server
+security:
+  - AppIdAuth: []
+    AppKeyAuth: []
+tags:
+  - name: Documents
+    description: Submit, monitor, and retrieve document OCR jobs.
+paths:
+  /v3/pdf:
+    post:
+      summary: Process A Document
+      description: >
+        Submit a document for asynchronous OCR. Accepts a public URL via JSON body or a multipart
+        file upload. Returns a pdf_id used to poll status and download results.
+      operationId: processDocument
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PdfRequest'
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The document binary to OCR.
+                options_json:
+                  type: string
+                  description: JSON-encoded request options matching PdfRequest fields.
+      responses:
+        '200':
+          description: Job accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PdfSubmitResponse'
+        '401':
+          description: Missing or invalid credentials.
+  /v3/pdf/{pdf_id}:
+    get:
+      summary: Get Document Status
+      description: Check processing status for a previously submitted document.
+      operationId: getDocumentStatus
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/PdfIdPath'
+      responses:
+        '200':
+          description: Job status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PdfStatus'
+    delete:
+      summary: Delete Document
+      description: Permanently delete the submitted document and its derived outputs.
+      operationId: deleteDocument
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/PdfIdPath'
+      responses:
+        '200':
+          description: Deletion confirmed.
+  /v3/pdf/{pdf_id}/stream:
+    get:
+      summary: Stream Document Results
+      description: Stream OCR results incrementally via server-sent events as pages complete.
+      operationId: streamDocument
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/PdfIdPath'
+      responses:
+        '200':
+          description: text/event-stream of incremental results.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+  /v3/pdf/{pdf_id}.mmd:
+    get:
+      summary: Download Mathpix Markdown
+      operationId: downloadMmd
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/PdfIdPath'
+      responses:
+        '200':
+          description: Mathpix Markdown file.
+          content:
+            text/plain:
+              schema:
+                type: string
+  /v3/pdf/{pdf_id}.md:
+    get:
+      summary: Download Standard Markdown
+      operationId: downloadMd
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/PdfIdPath'
+      responses:
+        '200':
+          description: Standard Markdown file.
+          content:
+            text/plain:
+              schema:
+                type: string
+  /v3/pdf/{pdf_id}.docx:
+    get:
+      summary: Download DOCX
+      operationId: downloadDocx
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/PdfIdPath'
+      responses:
+        '200':
+          description: Microsoft Word document.
+          content:
+            application/vnd.openxmlformats-officedocument.wordprocessingml.document:
+              schema:
+                type: string
+                format: binary
+  /v3/pdf/{pdf_id}.tex.zip:
+    get:
+      summary: Download LaTeX Archive
+      operationId: downloadTexZip
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/PdfIdPath'
+      responses:
+        '200':
+          description: Zipped LaTeX source.
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+  /v3/pdf/{pdf_id}.html:
+    get:
+      summary: Download HTML
+      operationId: downloadHtml
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/PdfIdPath'
+      responses:
+        '200':
+          description: HTML document.
+          content:
+            text/html:
+              schema:
+                type: string
+  /v3/pdf/{pdf_id}.pptx:
+    get:
+      summary: Download PPTX
+      operationId: downloadPptx
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/PdfIdPath'
+      responses:
+        '200':
+          description: PowerPoint document.
+          content:
+            application/vnd.openxmlformats-officedocument.presentationml.presentation:
+              schema:
+                type: string
+                format: binary
+  /v3/pdf/{pdf_id}.lines.json:
+    get:
+      summary: Download Lines JSON
+      operationId: downloadLinesJson
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/PdfIdPath'
+      responses:
+        '200':
+          description: Line-by-line JSON data.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+components:
+  securitySchemes:
+    AppIdAuth:
+      type: apiKey
+      in: header
+      name: app_id
+    AppKeyAuth:
+      type: apiKey
+      in: header
+      name: app_key
+  parameters:
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    PdfIdPath:
+      name: pdf_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Job identifier returned by POST /v3/pdf.
+  schemas:
+    PdfRequest:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: HTTPS URL to download the document from. Mutually exclusive with multipart file upload.
+        streaming:
+          type: boolean
+          description: When true, results are emitted via SSE on /v3/pdf/{pdf_id}/stream as pages complete.
+          default: false
+        metadata:
+          type: object
+          additionalProperties: true
+        alphabets_allowed:
+          type: object
+          description: Restrict the OCR output to specific alphabets (e.g. {"en": true, "ru": false}).
+          additionalProperties:
+            type: boolean
+        rm_spaces:
+          type: boolean
+          default: true
+        rm_fonts:
+          type: boolean
+          default: false
+        idiomatic_eqn_arrays:
+          type: boolean
+          default: false
+        include_equation_tags:
+          type: boolean
+        include_smiles:
+          type: boolean
+          default: true
+        include_page_breaks:
+          type: boolean
+          default: false
+        include_page_info:
+          type: boolean
+          default: false
+        page_ranges:
+          type: string
+          description: Comma-separated page selection (e.g. "2,4-6").
+        conversion_formats:
+          type: object
+          description: Output formats to generate, e.g. {"docx": true, "tex.zip": true, "md": true, "html": true, "pptx": true}.
+          additionalProperties:
+            type: boolean
+        conversion_options:
+          type: object
+          additionalProperties: true
+    PdfSubmitResponse:
+      type: object
+      properties:
+        pdf_id:
+          type: string
+          description: Identifier used to poll status and download outputs.
+    PdfStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [received, loaded, split, completed, processing, error]
+        num_pages:
+          type: integer
+        percent_done:
+          type: number
+          format: float
+        error:
+          type: string
+        conversion_status:
+          type: object
+          description: Per-format conversion progress map (e.g. {"docx": {"status": "completed"}}).
+          additionalProperties:
+            type: object
+            additionalProperties: true

@@ -1,0 +1,108 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "mathpix": "https://api.mathpix.com/v3/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "ImageOcrRequest": {
+      "@id": "mathpix:ImageOcrRequest",
+      "@context": {
+        "src": {"@id": "mathpix:ImageOcrRequest/src", "@type": "xsd:string"},
+        "formats": {"@id": "mathpix:ImageOcrRequest/formats", "@container": "@list"},
+        "metadata": {"@id": "mathpix:ImageOcrRequest/metadata"},
+        "math_inline_delimiters": {"@id": "mathpix:ImageOcrRequest/mathInlineDelimiters", "@container": "@list"},
+        "math_display_delimiters": {"@id": "mathpix:ImageOcrRequest/mathDisplayDelimiters", "@container": "@list"},
+        "include_line_data": {"@id": "mathpix:ImageOcrRequest/includeLineData", "@type": "xsd:boolean"},
+        "include_word_data": {"@id": "mathpix:ImageOcrRequest/includeWordData", "@type": "xsd:boolean"},
+        "rm_spaces": {"@id": "mathpix:ImageOcrRequest/rmSpaces", "@type": "xsd:boolean"},
+        "confidence_threshold": {"@id": "mathpix:ImageOcrRequest/confidenceThreshold", "@type": "xsd:decimal"}
+      }
+    },
+
+    "ImageOcrResult": {
+      "@id": "mathpix:ImageOcrResult",
+      "@context": {
+        "request_id": {"@id": "mathpix:ImageOcrResult/requestId", "@type": "xsd:string"},
+        "text": {"@id": "mathpix:ImageOcrResult/text", "@type": "xsd:string"},
+        "latex_styled": {"@id": "mathpix:ImageOcrResult/latexStyled", "@type": "xsd:string"},
+        "html": {"@id": "mathpix:ImageOcrResult/html", "@type": "xsd:string"},
+        "data": {"@id": "mathpix:ImageOcrResult/data", "@container": "@list"},
+        "confidence": {"@id": "mathpix:ImageOcrResult/confidence", "@type": "xsd:decimal"},
+        "confidence_rate": {"@id": "mathpix:ImageOcrResult/confidenceRate", "@type": "xsd:decimal"},
+        "is_printed": {"@id": "mathpix:ImageOcrResult/isPrinted", "@type": "xsd:boolean"},
+        "is_handwritten": {"@id": "mathpix:ImageOcrResult/isHandwritten", "@type": "xsd:boolean"},
+        "auto_rotate_confidence": {"@id": "mathpix:ImageOcrResult/autoRotateConfidence", "@type": "xsd:decimal"},
+        "auto_rotate_degrees": {"@id": "mathpix:ImageOcrResult/autoRotateDegrees", "@type": "xsd:integer"},
+        "image_height": {"@id": "mathpix:ImageOcrResult/imageHeight", "@type": "xsd:integer"},
+        "image_width": {"@id": "mathpix:ImageOcrResult/imageWidth", "@type": "xsd:integer"},
+        "line_data": {"@id": "mathpix:ImageOcrResult/lineData", "@container": "@list"},
+        "word_data": {"@id": "mathpix:ImageOcrResult/wordData", "@container": "@list"},
+        "version": {"@id": "mathpix:ImageOcrResult/version", "@type": "xsd:string"}
+      }
+    },
+
+    "DocumentOcrJob": {
+      "@id": "mathpix:DocumentOcrJob",
+      "@context": {
+        "pdf_id": {"@id": "mathpix:DocumentOcrJob/pdfId", "@type": "xsd:string"},
+        "status": {"@id": "mathpix:DocumentOcrJob/status", "@type": "xsd:string"},
+        "num_pages": {"@id": "mathpix:DocumentOcrJob/numPages", "@type": "xsd:integer"},
+        "percent_done": {"@id": "mathpix:DocumentOcrJob/percentDone", "@type": "xsd:decimal"},
+        "conversion_status": {"@id": "mathpix:DocumentOcrJob/conversionStatus"}
+      }
+    },
+
+    "ConversionJob": {
+      "@id": "mathpix:ConversionJob",
+      "@context": {
+        "conversion_id": {"@id": "mathpix:ConversionJob/conversionId", "@type": "xsd:string"},
+        "status": {"@id": "mathpix:ConversionJob/status", "@type": "xsd:string"},
+        "conversion_status": {"@id": "mathpix:ConversionJob/conversionStatus"}
+      }
+    },
+
+    "Batch": {
+      "@id": "mathpix:Batch",
+      "@context": {
+        "batch_id": {"@id": "mathpix:Batch/batchId", "@type": "xsd:integer"},
+        "urls": {"@id": "mathpix:Batch/urls"},
+        "ocr_behavior": {"@id": "mathpix:Batch/ocrBehavior", "@type": "xsd:string"},
+        "callback": {"@id": "mathpix:Batch/callback"},
+        "keys": {"@id": "mathpix:Batch/keys", "@container": "@list"},
+        "results": {"@id": "mathpix:Batch/results"}
+      }
+    },
+
+    "StrokesRequest": {
+      "@id": "mathpix:StrokesRequest",
+      "@context": {
+        "strokes": {"@id": "mathpix:StrokesRequest/strokes"},
+        "strokes_session_id": {"@id": "mathpix:StrokesRequest/strokesSessionId", "@type": "xsd:string"}
+      }
+    },
+
+    "AppToken": {
+      "@id": "mathpix:AppToken",
+      "@context": {
+        "app_token": {"@id": "mathpix:AppToken/token", "@type": "xsd:string"},
+        "app_token_expires_at": {"@id": "mathpix:AppToken/expiresAt", "@type": "xsd:integer"},
+        "strokes_session_id": {"@id": "mathpix:AppToken/strokesSessionId", "@type": "xsd:string"}
+      }
+    },
+
+    "UsageRecord": {
+      "@id": "mathpix:UsageRecord",
+      "@context": {
+        "from_date": {"@id": "mathpix:UsageRecord/fromDate", "@type": "xsd:dateTime"},
+        "app_id": {"@id": "mathpix:UsageRecord/appId", "@type": "xsd:string"},
+        "group_id": {"@id": "mathpix:UsageRecord/groupId", "@type": "xsd:string"},
+        "usage_type": {"@id": "mathpix:UsageRecord/usageType", "@type": "xsd:string"},
+        "request_args_hash": {"@id": "mathpix:UsageRecord/requestArgsHash", "@type": "xsd:string"},
+        "count": {"@id": "mathpix:UsageRecord/count", "@type": "xsd:integer"}
+      }
+    }
+  }
+}

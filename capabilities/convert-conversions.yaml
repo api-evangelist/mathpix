@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mathpix Convert API — Conversions
+  description: 'Mathpix Convert API — Conversions. Convert Mathpix Markdown into DOCX, LaTeX, HTML,
+    PDF, PPTX, and archived multi-file outputs. Self-contained Naftiko capability.'
+  tags:
+  - Mathpix
+  - Conversion
+  - Markdown
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    MATHPIX_APP_ID: MATHPIX_APP_ID
+    MATHPIX_APP_KEY: MATHPIX_APP_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: convert-conversions
+    baseUri: https://api.mathpix.com
+    resources:
+    - name: v3-converter
+      path: /v3/converter
+      operations:
+      - name: convertmarkdown
+        method: POST
+        description: Convert Mathpix Markdown
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: v3-converter-item
+      path: /v3/converter/{conversion_id}
+      operations:
+      - name: getconversionstatus
+        method: GET
+        description: Get Conversion Status
+        outputRawFormat: json
+        inputParameters:
+        - name: conversion_id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: app_key
+      value: '{{env.MATHPIX_APP_KEY}}'
+      placement: header
+      additionalHeaders:
+        app_id: '{{env.MATHPIX_APP_ID}}'
+  exposes:
+  - type: rest
+    namespace: convert-conversions-rest
+    port: 8080
+    resources:
+    - path: /v1/v3/converter
+      name: v3-converter
+      operations:
+      - method: POST
+        name: convertmarkdown
+        description: Convert Mathpix Markdown
+        call: convert-conversions.convertmarkdown
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: convert-conversions-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: mathpix-convert-markdown
+      description: Convert Mathpix Markdown
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: convert-conversions.convertmarkdown
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mathpix-get-conversion-status
+      description: Get Conversion Status
+      hints:
+        readOnly: true
+        idempotent: true
+      call: convert-conversions.getconversionstatus
+      with:
+        conversion_id: tools.conversion_id
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,92 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mathpix OCR Usage API — Usage
+  description: 'Mathpix OCR Usage API — Usage. Aggregate OCR consumption by usage_type, request_args_hash,
+    or app_id over arbitrary timespans. Self-contained Naftiko capability.'
+  tags:
+  - Mathpix
+  - Usage
+  - Metering
+  - FinOps
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    MATHPIX_APP_ID: MATHPIX_APP_ID
+    MATHPIX_APP_KEY: MATHPIX_APP_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ocr-usage-usage
+    baseUri: https://api.mathpix.com
+    resources:
+    - name: v3-ocr-usage
+      path: /v3/ocr-usage
+      operations:
+      - name: queryocrusage
+        method: GET
+        description: Query OCR Usage
+        outputRawFormat: json
+        inputParameters:
+        - name: from_date
+          in: query
+          type: string
+        - name: to_date
+          in: query
+          type: string
+        - name: group_by
+          in: query
+          type: string
+          required: true
+        - name: timespan
+          in: query
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: app_key
+      value: '{{env.MATHPIX_APP_KEY}}'
+      placement: header
+      additionalHeaders:
+        app_id: '{{env.MATHPIX_APP_ID}}'
+  exposes:
+  - type: rest
+    namespace: ocr-usage-usage-rest
+    port: 8080
+    resources:
+    - path: /v1/v3/ocr-usage
+      name: v3-ocr-usage
+      operations:
+      - method: GET
+        name: queryocrusage
+        description: Query OCR Usage
+        call: ocr-usage-usage.queryocrusage
+        with:
+          group_by: rest.group_by
+          timespan: rest.timespan
+          from_date: rest.from_date
+          to_date: rest.to_date
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ocr-usage-usage-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: mathpix-query-ocr-usage
+      description: Query OCR Usage
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ocr-usage-usage.queryocrusage
+      with:
+        group_by: tools.group_by
+        timespan: tools.timespan
+        from_date: tools.from_date
+        to_date: tools.to_date
+      outputParameters:
+      - type: object
+        mapping: $.

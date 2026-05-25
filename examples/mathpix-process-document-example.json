@@ -1,0 +1,48 @@
+{
+  "operation": "processDocument",
+  "method": "POST",
+  "url": "https://api.mathpix.com/v3/pdf",
+  "headers": {
+    "app_id": "your-app-id",
+    "app_key": "your-app-key",
+    "Content-Type": "application/json"
+  },
+  "request": {
+    "url": "https://arxiv.org/pdf/2106.11189.pdf",
+    "conversion_formats": {
+      "docx": true,
+      "tex.zip": true,
+      "md": true,
+      "html": true,
+      "pptx": false
+    },
+    "math_inline_delimiters": ["$", "$"],
+    "rm_spaces": true,
+    "include_smiles": true,
+    "include_equation_tags": true,
+    "page_ranges": "1-12"
+  },
+  "response": {
+    "pdf_id": "2026_05_25_abc123def456"
+  },
+  "poll": {
+    "method": "GET",
+    "url": "https://api.mathpix.com/v3/pdf/2026_05_25_abc123def456",
+    "response": {
+      "status": "completed",
+      "num_pages": 12,
+      "percent_done": 100,
+      "conversion_status": {
+        "docx": {"status": "completed"},
+        "tex.zip": {"status": "completed"},
+        "md": {"status": "completed"},
+        "html": {"status": "completed"}
+      }
+    }
+  },
+  "download": {
+    "mmd": "GET https://api.mathpix.com/v3/pdf/2026_05_25_abc123def456.mmd",
+    "docx": "GET https://api.mathpix.com/v3/pdf/2026_05_25_abc123def456.docx",
+    "tex_zip": "GET https://api.mathpix.com/v3/pdf/2026_05_25_abc123def456.tex.zip"
+  }
+}

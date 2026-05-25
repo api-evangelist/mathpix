@@ -1,0 +1,35 @@
+{
+  "operation": "processStrokes",
+  "method": "POST",
+  "url": "https://api.mathpix.com/v3/strokes",
+  "headers": {
+    "app_id": "your-app-id",
+    "app_key": "your-app-key",
+    "Content-Type": "application/json"
+  },
+  "request": {
+    "strokes": {
+      "strokes": {
+        "x": [
+          [10, 12, 15, 20, 28, 35, 40],
+          [50, 55, 60, 65]
+        ],
+        "y": [
+          [50, 48, 47, 45, 47, 48, 50],
+          [40, 42, 45, 50]
+        ]
+      }
+    },
+    "formats": ["text", "latex_styled"]
+  },
+  "response": {
+    "request_id": "strokes_2026_05_25_aaa111",
+    "text": "\\( y = 2x + 1 \\)",
+    "latex_styled": "y = 2x + 1",
+    "confidence": 0.987,
+    "confidence_rate": 0.998,
+    "is_printed": false,
+    "is_handwritten": true,
+    "version": "RSK-M114"
+  }
+}

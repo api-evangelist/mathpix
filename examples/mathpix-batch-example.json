@@ -1,0 +1,40 @@
+{
+  "operation": "submitBatch",
+  "method": "POST",
+  "url": "https://api.mathpix.com/v3/batch",
+  "headers": {
+    "app_id": "your-app-id",
+    "app_key": "your-app-key",
+    "Content-Type": "application/json"
+  },
+  "request": {
+    "urls": {
+      "eq1": "https://mathpix-ocr-examples.s3.amazonaws.com/equation1.png",
+      "eq2": "https://mathpix-ocr-examples.s3.amazonaws.com/equation2.png",
+      "table1": {
+        "url": "https://mathpix-ocr-examples.s3.amazonaws.com/table1.png",
+        "formats": ["text", "data"]
+      }
+    },
+    "ocr_behavior": "latex",
+    "callback": {
+      "post": "https://example.com/mathpix/callback",
+      "reply": "json"
+    }
+  },
+  "response": {
+    "batch_id": 178452
+  },
+  "poll": {
+    "method": "GET",
+    "url": "https://api.mathpix.com/v3/batch/178452",
+    "response": {
+      "keys": ["eq1", "eq2", "table1"],
+      "results": {
+        "eq1": {"text": "\\( E = mc^2 \\)", "confidence": 0.999},
+        "eq2": {"text": "\\( \\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2} \\)", "confidence": 0.998},
+        "table1": {"text": "...", "data": [{"type": "tsv", "value": "a\tb\nc\td"}]}
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "operation": "convertMarkdown",
+  "method": "POST",
+  "url": "https://api.mathpix.com/v3/converter",
+  "headers": {
+    "app_id": "your-app-id",
+    "app_key": "your-app-key",
+    "Content-Type": "application/json"
+  },
+  "request": {
+    "mmd": "# Quadratic Formula\n\nThe roots of $ax^2 + bx + c = 0$ are:\n\n$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n",
+    "formats": {
+      "docx": true,
+      "tex.zip": true,
+      "html": true,
+      "pdf": true,
+      "pptx": false
+    }
+  },
+  "response": {
+    "conversion_id": "conv_2026_05_25_xyz789"
+  },
+  "poll": {
+    "method": "GET",
+    "url": "https://api.mathpix.com/v3/converter/conv_2026_05_25_xyz789",
+    "response": {
+      "status": "completed",
+      "conversion_status": {
+        "docx": {"status": "completed"},
+        "tex.zip": {"status": "completed"},
+        "html": {"status": "completed"},
+        "pdf": {"status": "completed"}
+      }
+    }
+  }
+}

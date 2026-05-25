@@ -1,0 +1,121 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Mathpix
+providerId: mathpix
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - OCR
+  - STEM
+  - Document Conversion
+  - Pay As You Go
+description: 'Plans and pricing surface for Mathpix Snip and the Convert API. Source: mathpix.com/pricing.
+  SCS (Secure Conversion Service) and on-premises pricing are custom and require sales contact.'
+sources:
+  - https://mathpix.com/pricing
+  - https://mathpix.com/pricing/all
+  - https://docs.mathpix.com/guides/authentication
+plans:
+  - id: mathpix-snip-free
+    name: Snip Free
+    type: free
+    description: Free Snip tier for individuals — desktop snipping tool, mobile, and limited document conversions.
+    entries:
+      - label: User
+        name: user
+        type: included
+        metric: user
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+
+  - id: mathpix-snip-pro
+    name: Snip Pro
+    type: subscription
+    description: Snip Pro subscription for individuals — higher limits, collaborative MMD editor, Chrome extension.
+    entries:
+      - label: User
+        name: user
+        type: subscription
+        metric: user
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '4.99'
+        userMultiplied: true
+
+  - id: mathpix-convert-api
+    name: Convert API
+    type: usage-based
+    description: Pay-as-you-go Convert API covering v3/text (image OCR), v3/pdf (document OCR), v3/converter
+      (MMD conversion), v3/batch, and v3/strokes. Billed per processed image or page; volume discounts available.
+    entries:
+      - label: Image OCR
+        name: image_ocr
+        type: metered
+        metric: image
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.002'
+        priceFloor: '0.002'
+        userMultiplied: false
+        description: From $0.002 per image at headline rate; volume tiers available.
+      - label: Document OCR
+        name: document_ocr
+        type: metered
+        metric: page
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'contact'
+        userMultiplied: false
+        description: Per-page document OCR pricing; consult sales for committed-volume rates.
+      - label: Conversion
+        name: conversion
+        type: metered
+        metric: conversion
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'contact'
+        userMultiplied: false
+        description: MMD-to-format conversion (DOCX, LaTeX, HTML, PDF, PPTX) priced per conversion.
+      - label: App Token Issuance
+        name: app_token
+        type: included
+        metric: token
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+        description: Token issuance via /v3/app-tokens is free.
+
+  - id: mathpix-scs
+    name: Secure Conversion Service (SCS)
+    type: enterprise
+    description: Dedicated infrastructure for high-volume STEM OCR and conversion with custom SLAs.
+      On-premises deployment option available via mathpix-on-prem.
+    entries:
+      - label: Contract
+        name: contract
+        type: custom
+        metric: contract
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: 'contact'
+        userMultiplied: false
+        description: Custom pricing — contact sales.
