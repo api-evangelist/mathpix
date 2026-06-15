@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mathpix Convert API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "app_id",
+      "value": "{{app_id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conversions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Convert Mathpix Markdown",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mathpix.com/v3/converter",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert a Mathpix Markdown string into one or more export formats. Returns a conversion_id used to poll status and download outputs."
+        },
+        {
+          "info": {
+            "name": "Get Conversion Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mathpix.com/v3/converter/:conversion_id",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "conversion_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Poll the status of a conversion job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

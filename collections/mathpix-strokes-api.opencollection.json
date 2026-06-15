@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mathpix Strokes API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "app_id",
+      "value": "{{app_id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Strokes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process Strokes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mathpix.com/v3/strokes",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit stroke coordinates representing handwriting and receive recognized MMD/LaTeX output."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

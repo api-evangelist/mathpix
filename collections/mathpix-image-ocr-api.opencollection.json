@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mathpix Image OCR API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "app_id",
+      "value": "{{app_id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process An Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mathpix.com/v3/text",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a single image (by URL or base64) and receive Mathpix Markdown (MMD) plus optional structured data, HTML, styled LaTeX, line data, and word data. Auto-detects whether the content is printed or handwritten.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

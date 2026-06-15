@@ -1,260 +1,248 @@
 aid: mathpix
 url: https://raw.githubusercontent.com/api-evangelist/mathpix/refs/heads/main/apis.yml
 apis:
-- aid: mathpix:mathpix-image-ocr-api
-  name: Mathpix Image OCR API
-  tags:
+  - aid: mathpix:mathpix-image-ocr-api
+    name: Mathpix Image OCR API
+    tags:
+      - OCR
+      - STEM
+      - Math
+      - Images
+    humanURL: https://docs.mathpix.com/reference/post-v3-text
+    properties:
+      - url: https://docs.mathpix.com/reference/post-v3-text
+        type: Documentation
+      - url: openapi/mathpix-image-ocr-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/mathpix-image-result-schema.json
+        type: JSONSchema
+      - url: json-ld/mathpix-context.jsonld
+        type: JSONLD
+      - url: examples/mathpix-process-image-example.json
+        type: Example
+    description: >-
+      Submit a single image (by URL or base64) to v3/text and receive Mathpix Markdown plus optional structured data,
+      HTML, styled LaTeX, and line- or word-level segmentation. Auto-detects printed vs. handwritten content and handles
+      math, text, tables, and chemistry diagrams.
+  - aid: mathpix:mathpix-document-ocr-api
+    name: Mathpix Document OCR API
+    tags:
+      - OCR
+      - PDF
+      - Documents
+      - STEM
+      - Conversion
+    humanURL: https://docs.mathpix.com/reference/post-v3-pdf
+    properties:
+      - url: https://docs.mathpix.com/reference/post-v3-pdf
+        type: Documentation
+      - url: openapi/mathpix-document-ocr-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/mathpix-document-result-schema.json
+        type: JSONSchema
+      - url: examples/mathpix-process-document-example.json
+        type: Example
+    description: >-
+      Asynchronous PDF and document OCR via v3/pdf. Submit by URL or multipart upload, poll status, optionally stream
+      via SSE, and download outputs in MMD, Markdown, DOCX, LaTeX (.tex.zip), HTML, PPTX, or per-line JSON. Supports
+      page ranges, alphabets, chemistry (SMILES), idiomatic equation arrays, and page-info capture.
+  - aid: mathpix:mathpix-convert-api
+    name: Mathpix Convert API
+    tags:
+      - Conversion
+      - Markdown
+      - DOCX
+      - LaTeX
+      - PDF
+      - PPTX
+    humanURL: https://docs.mathpix.com/reference/post-v3-converter
+    properties:
+      - url: https://docs.mathpix.com/reference/post-v3-converter
+        type: Documentation
+      - url: openapi/mathpix-convert-api-openapi.yml
+        type: OpenAPI
+      - url: examples/mathpix-convert-markdown-example.json
+        type: Example
+    description: >-
+      Transform Mathpix Markdown into DOCX, LaTeX archives, HTML, PDF, PPTX, plain Markdown, and zipped multi-file
+      outputs. Synchronous submission returns a conversion_id used to poll per-format completion and download artifacts.
+  - aid: mathpix:mathpix-batch-api
+    name: Mathpix Batch API
+    tags:
+      - Batch
+      - OCR
+      - Images
+    humanURL: https://docs.mathpix.com/reference/post-v3-batch
+    properties:
+      - url: https://docs.mathpix.com/reference/post-v3-batch
+        type: Documentation
+      - url: openapi/mathpix-batch-api-openapi.yml
+        type: OpenAPI
+      - url: examples/mathpix-batch-example.json
+        type: Example
+    description: >-
+      Submit many image URLs (with optional per-image options) in a single v3/batch request, poll once per ~5 images,
+      and retrieve a results map keyed by caller-defined identifiers. Supports optional webhook callbacks.
+  - aid: mathpix:mathpix-strokes-api
+    name: Mathpix Strokes API
+    tags:
+      - Handwriting
+      - Digital Ink
+      - OCR
+      - STEM
+    humanURL: https://docs.mathpix.com/reference/post-v3-strokes
+    properties:
+      - url: https://docs.mathpix.com/reference/post-v3-strokes
+        type: Documentation
+      - url: openapi/mathpix-strokes-api-openapi.yml
+        type: OpenAPI
+      - url: examples/mathpix-strokes-example.json
+        type: Example
+    description: >-
+      Recognize handwritten math, text, and chemistry from raw stroke coordinates (x/y arrays) via v3/strokes. Pairs
+      with the App Tokens API and strokes_session_id for client-side digital-ink capture in browsers and tablets.
+  - aid: mathpix:mathpix-app-tokens-api
+    name: Mathpix App Tokens API
+    tags:
+      - Authentication
+      - Tokens
+      - Security
+    humanURL: https://docs.mathpix.com/reference/post-v3-app-tokens
+    properties:
+      - url: https://docs.mathpix.com/reference/post-v3-app-tokens
+        type: Documentation
+      - url: openapi/mathpix-app-tokens-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Mint short-lived client-side app_token credentials (30 seconds to 12 hours; 5 minutes by default) so browsers,
+      mobile clients, and digital-ink surfaces can call Mathpix without exposing the long-lived app_key. Token issuance
+      is free.
+  - aid: mathpix:mathpix-ocr-usage-api
+    name: Mathpix OCR Usage API
+    tags:
+      - Usage
+      - Metering
+      - FinOps
+      - Administration
+    humanURL: https://docs.mathpix.com/reference/ocr-usage
+    properties:
+      - url: https://docs.mathpix.com/reference/ocr-usage
+        type: Documentation
+      - url: openapi/mathpix-ocr-usage-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Query OCR consumption metrics aggregated by usage_type, request_args_hash, or app_id, over arbitrary timespans
+      (hour, day, week, month). Used to track consumption trends and reconcile billing.
+name: Mathpix
+tags:
   - OCR
   - STEM
   - Math
-  - Images
-  humanURL: https://docs.mathpix.com/reference/post-v3-text
-  properties:
-  - url: https://docs.mathpix.com/reference/post-v3-text
-    type: Documentation
-  - url: openapi/mathpix-image-ocr-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/mathpix-image-result-schema.json
-    type: JSONSchema
-  - url: json-ld/mathpix-context.jsonld
-    type: JSONLD
-  - type: NaftikoCapability
-    url: capabilities/image-ocr-images.yaml
-  - url: examples/mathpix-process-image-example.json
-    type: Example
-  description: Submit a single image (by URL or base64) to v3/text and receive Mathpix Markdown plus
-    optional structured data, HTML, styled LaTeX, and line- or word-level segmentation. Auto-detects
-    printed vs. handwritten content and handles math, text, tables, and chemistry diagrams.
-- aid: mathpix:mathpix-document-ocr-api
-  name: Mathpix Document OCR API
-  tags:
-  - OCR
+  - Chemistry
+  - Document Conversion
   - PDF
-  - Documents
-  - STEM
-  - Conversion
-  humanURL: https://docs.mathpix.com/reference/post-v3-pdf
-  properties:
-  - url: https://docs.mathpix.com/reference/post-v3-pdf
-    type: Documentation
-  - url: openapi/mathpix-document-ocr-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/mathpix-document-result-schema.json
-    type: JSONSchema
-  - type: NaftikoCapability
-    url: capabilities/document-ocr-documents.yaml
-  - url: examples/mathpix-process-document-example.json
-    type: Example
-  description: Asynchronous PDF and document OCR via v3/pdf. Submit by URL or multipart upload, poll
-    status, optionally stream via SSE, and download outputs in MMD, Markdown, DOCX, LaTeX (.tex.zip),
-    HTML, PPTX, or per-line JSON. Supports page ranges, alphabets, chemistry (SMILES), idiomatic
-    equation arrays, and page-info capture.
-- aid: mathpix:mathpix-convert-api
-  name: Mathpix Convert API
-  tags:
-  - Conversion
-  - Markdown
-  - DOCX
   - LaTeX
-  - PDF
-  - PPTX
-  humanURL: https://docs.mathpix.com/reference/post-v3-converter
-  properties:
-  - url: https://docs.mathpix.com/reference/post-v3-converter
-    type: Documentation
-  - url: openapi/mathpix-convert-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/convert-conversions.yaml
-  - url: examples/mathpix-convert-markdown-example.json
-    type: Example
-  description: Transform Mathpix Markdown into DOCX, LaTeX archives, HTML, PDF, PPTX, plain Markdown,
-    and zipped multi-file outputs. Synchronous submission returns a conversion_id used to poll
-    per-format completion and download artifacts.
-- aid: mathpix:mathpix-batch-api
-  name: Mathpix Batch API
-  tags:
-  - Batch
-  - OCR
-  - Images
-  humanURL: https://docs.mathpix.com/reference/post-v3-batch
-  properties:
-  - url: https://docs.mathpix.com/reference/post-v3-batch
-    type: Documentation
-  - url: openapi/mathpix-batch-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/batch-batches.yaml
-  - url: examples/mathpix-batch-example.json
-    type: Example
-  description: Submit many image URLs (with optional per-image options) in a single v3/batch request,
-    poll once per ~5 images, and retrieve a results map keyed by caller-defined identifiers. Supports
-    optional webhook callbacks.
-- aid: mathpix:mathpix-strokes-api
-  name: Mathpix Strokes API
-  tags:
   - Handwriting
-  - Digital Ink
-  - OCR
-  - STEM
-  humanURL: https://docs.mathpix.com/reference/post-v3-strokes
-  properties:
-  - url: https://docs.mathpix.com/reference/post-v3-strokes
-    type: Documentation
-  - url: openapi/mathpix-strokes-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/strokes-strokes.yaml
-  - url: examples/mathpix-strokes-example.json
-    type: Example
-  description: Recognize handwritten math, text, and chemistry from raw stroke coordinates (x/y
-    arrays) via v3/strokes. Pairs with the App Tokens API and strokes_session_id for client-side
-    digital-ink capture in browsers and tablets.
-- aid: mathpix:mathpix-app-tokens-api
-  name: Mathpix App Tokens API
-  tags:
-  - Authentication
-  - Tokens
-  - Security
-  humanURL: https://docs.mathpix.com/reference/post-v3-app-tokens
-  properties:
-  - url: https://docs.mathpix.com/reference/post-v3-app-tokens
-    type: Documentation
-  - url: openapi/mathpix-app-tokens-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/app-tokens-tokens.yaml
-  description: Mint short-lived client-side app_token credentials (30 seconds to 12 hours; 5 minutes
-    by default) so browsers, mobile clients, and digital-ink surfaces can call Mathpix without
-    exposing the long-lived app_key. Token issuance is free.
-- aid: mathpix:mathpix-ocr-usage-api
-  name: Mathpix OCR Usage API
-  tags:
-  - Usage
-  - Metering
-  - FinOps
-  - Administration
-  humanURL: https://docs.mathpix.com/reference/ocr-usage
-  properties:
-  - url: https://docs.mathpix.com/reference/ocr-usage
-    type: Documentation
-  - url: openapi/mathpix-ocr-usage-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/ocr-usage-usage.yaml
-  description: Query OCR consumption metrics aggregated by usage_type, request_args_hash, or app_id,
-    over arbitrary timespans (hour, day, week, month). Used to track consumption trends and
-    reconcile billing.
-name: Mathpix
-tags:
-- OCR
-- STEM
-- Math
-- Chemistry
-- Document Conversion
-- PDF
-- LaTeX
-- Handwriting
-- AI
-- Machine Learning
+  - AI
+  - Machine Learning
 kind: contract
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
-- type: LinkedIn
-  url: https://www.linkedin.com/company/mathpix
-- type: Twitter
-  url: https://twitter.com/MathpixApp
-- type: GitHub
-  url: https://github.com/Mathpix
-- type: Portal
-  url: https://docs.mathpix.com
-  name: Mathpix Developer Documentation
-- type: Documentation
-  url: https://docs.mathpix.com/reference/introduction
-  name: API Reference
-- type: Documentation
-  url: https://docs.mathpix.com/guides/authentication
-  name: Authentication Guide
-- type: Pricing
-  url: https://mathpix.com/pricing
-  name: Pricing
-- type: SignUp
-  url: https://accounts.mathpix.com/signup
-  name: Sign Up
-- type: Login
-  url: https://accounts.mathpix.com/login
-  name: Console Login
-- type: Console
-  url: https://console.mathpix.com
-  name: Mathpix Console
-- type: Blog
-  url: https://mathpix.com/blog
-  name: Mathpix Blog
-- type: Support
-  url: mailto:support@mathpix.com
-  name: Support Email
-- type: ContactSales
-  url: https://mathpix.com/contact-sales
-  name: Contact Sales
-- type: TermsOfService
-  url: https://mathpix.com/terms-of-service
-  name: Terms of Service
-- type: PrivacyPolicy
-  url: https://mathpix.com/privacy
-  name: Privacy Policy
-- type: SDK
-  url: https://github.com/Mathpix/mpxpy
-  name: Python SDK (mpxpy)
-- type: SDK
-  url: https://github.com/Mathpix/ios-client
-  name: iOS Client
-- type: CLI
-  url: https://github.com/Mathpix/mpx-cli
-  name: Mathpix CLI (mpx)
-- type: Samples
-  url: https://github.com/Mathpix/api-examples
-  name: API Examples
-- type: Tools
-  url: https://github.com/Mathpix/mathpix-markdown-it
-  name: mathpix-markdown-it (Markdown + LaTeX renderer)
-- type: Tools
-  url: https://github.com/Mathpix/vscode-mathpix-markdown
-  name: VS Code Extension for Mathpix Markdown
-- type: Tools
-  url: https://github.com/Mathpix/PDF_Accessibility
-  name: PDF Accessibility Toolkit (WCAG 2.1 AA)
-- type: Application
-  url: https://snip.mathpix.com
-  name: Snip (collaborative MMD editor)
-- type: Application
-  url: https://snip.mathpix.com/download
-  name: Snipping Tool (desktop)
-- type: Application
-  url: https://chromewebstore.google.com/detail/mathpix-snipping-tool/
-  name: Chrome Extension
-- url: plans/mathpix-plans-pricing.yml
-  type: Plans
-  name: API Commons Plans
-- url: rate-limits/mathpix-rate-limits.yml
-  type: RateLimits
-  name: API Commons Rate Limits
-- url: finops/mathpix-finops.yml
-  type: FinOps
-  name: FinOps / FOCUS Alignment
-- url: vocabulary/mathpix-vocabulary.yml
-  type: Vocabulary
-  name: Mathpix Vocabulary
-- url: rules/mathpix-rules.yml
-  type: SpectralRules
-  name: Mathpix Spectral Ruleset
-- url: json-ld/mathpix-context.jsonld
-  type: JSONLD
-  name: Mathpix JSON-LD Context
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/mathpix
+  - type: Twitter
+    url: https://twitter.com/MathpixApp
+  - type: GitHub
+    url: https://github.com/Mathpix
+  - type: Portal
+    url: https://docs.mathpix.com
+    name: Mathpix Developer Documentation
+  - type: Documentation
+    url: https://docs.mathpix.com/reference/introduction
+    name: API Reference
+  - type: Documentation
+    url: https://docs.mathpix.com/guides/authentication
+    name: Authentication Guide
+  - type: Pricing
+    url: https://mathpix.com/pricing
+    name: Pricing
+  - type: SignUp
+    url: https://accounts.mathpix.com/signup
+    name: Sign Up
+  - type: Login
+    url: https://accounts.mathpix.com/login
+    name: Console Login
+  - type: Console
+    url: https://console.mathpix.com
+    name: Mathpix Console
+  - type: Blog
+    url: https://mathpix.com/blog
+    name: Mathpix Blog
+  - type: Support
+    url: mailto:support@mathpix.com
+    name: Support Email
+  - type: ContactSales
+    url: https://mathpix.com/contact-sales
+    name: Contact Sales
+  - type: TermsOfService
+    url: https://mathpix.com/terms-of-service
+    name: Terms of Service
+  - type: PrivacyPolicy
+    url: https://mathpix.com/privacy
+    name: Privacy Policy
+  - type: SDK
+    url: https://github.com/Mathpix/mpxpy
+    name: Python SDK (mpxpy)
+  - type: SDK
+    url: https://github.com/Mathpix/ios-client
+    name: iOS Client
+  - type: CLI
+    url: https://github.com/Mathpix/mpx-cli
+    name: Mathpix CLI (mpx)
+  - type: Samples
+    url: https://github.com/Mathpix/api-examples
+    name: API Examples
+  - type: Tools
+    url: https://github.com/Mathpix/mathpix-markdown-it
+    name: mathpix-markdown-it (Markdown + LaTeX renderer)
+  - type: Tools
+    url: https://github.com/Mathpix/vscode-mathpix-markdown
+    name: VS Code Extension for Mathpix Markdown
+  - type: Tools
+    url: https://github.com/Mathpix/PDF_Accessibility
+    name: PDF Accessibility Toolkit (WCAG 2.1 AA)
+  - type: Application
+    url: https://snip.mathpix.com
+    name: Snip (collaborative MMD editor)
+  - type: Application
+    url: https://snip.mathpix.com/download
+    name: Snipping Tool (desktop)
+  - type: Application
+    url: https://chromewebstore.google.com/detail/mathpix-snipping-tool/
+    name: Chrome Extension
+  - url: plans/mathpix-plans-pricing.yml
+    type: Plans
+    name: API Commons Plans
+  - url: rate-limits/mathpix-rate-limits.yml
+    type: RateLimits
+    name: API Commons Rate Limits
+  - url: finops/mathpix-finops.yml
+    type: FinOps
+    name: FinOps / FOCUS Alignment
+  - url: vocabulary/mathpix-vocabulary.yml
+    type: Vocabulary
+    name: Mathpix Vocabulary
+  - url: rules/mathpix-rules.yml
+    type: SpectralRules
+    name: Mathpix Spectral Ruleset
+  - url: json-ld/mathpix-context.jsonld
+    type: JSONLD
+    name: Mathpix JSON-LD Context
 include: []
 maintainers:
-- FN: Kin Lane
-  email: info@apievangelist.com
-  X-twitter: apievangelist
+  - FN: Kin Lane
+    email: info@apievangelist.com
+    X-twitter: apievangelist
 created: '2026-05-25'
 modified: '2026-05-25'

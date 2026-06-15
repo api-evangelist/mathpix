@@ -1,0 +1,195 @@
+{
+  "item": [
+    {
+      "id": "cbe9eb58-ea45-4793-ab2b-44c0a150672a",
+      "name": "Usage",
+      "description": {
+        "content": "Inspect OCR consumption.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a365c96-ecf0-4db9-acb7-954e3680b5d9",
+          "name": "Query OCR Usage",
+          "request": {
+            "name": "Query OCR Usage",
+            "description": {
+              "content": "Aggregate OCR usage across a time window. Group by usage_type, request_args_hash, or app_id, and pick a timespan such as month, week, day, or hour.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "ocr-usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from_date",
+                  "value": "<dateTime>",
+                  "description": "ISO datetime lower bound (inclusive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "to_date",
+                  "value": "<dateTime>",
+                  "description": "ISO datetime upper bound (exclusive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "group_by",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "timespan",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "app_id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "app_key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "698c8d98-1260-4352-a7e7-0de3460852fa",
+              "name": "Aggregated usage.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "ocr-usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timespan",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "app_id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "app_id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ocr_usage\": [\n    {\n      \"from_date\": \"2016-09-13T11:25:28.407Z\",\n      \"app_id\": \"string\",\n      \"group_id\": \"string\",\n      \"usage_type\": \"string\",\n      \"request_args_hash\": \"string\",\n      \"count\": 7636\n    },\n    {\n      \"from_date\": \"2003-02-07T18:55:20.145Z\",\n      \"app_id\": \"string\",\n      \"group_id\": \"string\",\n      \"usage_type\": \"string\",\n      \"request_args_hash\": \"string\",\n      \"count\": 929\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mathpix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "app_id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c68f031c-c2c3-4176-9ebb-9f01444ccefb",
+    "name": "Mathpix OCR Usage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Query OCR consumption metrics aggregated by usage type, request signature, or application, over arbitrary timespans. Used to track consumption trends and reconcile billing.\n\n\nContact Support:\n Name: Mathpix Support\n Email: support@mathpix.com",
+      "type": "text/plain"
+    }
+  }
+}

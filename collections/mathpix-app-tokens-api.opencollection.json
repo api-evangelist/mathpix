@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mathpix App Tokens API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "app_key",
+      "value": "{{app_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "App Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create An App Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mathpix.com/v3/app-tokens",
+            "headers": [
+              {
+                "name": "app_key",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mint a temporary app_token for client-side use. Authenticated with the long-lived app_key only."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

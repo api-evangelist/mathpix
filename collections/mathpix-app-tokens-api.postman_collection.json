@@ -1,0 +1,168 @@
+{
+  "item": [
+    {
+      "id": "466b18e4-7248-47d4-80a8-9074582a190c",
+      "name": "App Tokens",
+      "description": {
+        "content": "Issue temporary client-side tokens.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9899dacf-ab31-46ea-b3ca-55ee56c1eb73",
+          "name": "Create An App Token",
+          "request": {
+            "name": "Create An App Token",
+            "description": {
+              "content": "Mint a temporary app_token for client-side use. Authenticated with the long-lived app_key only.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "app-tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Long-lived Mathpix application secret.",
+                "key": "app_key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expires\": 300,\n  \"include_strokes_session_id\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0caf1f05-e0a1-48da-9b62-baa42d7de246",
+              "name": "Token issued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "app-tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "app_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Long-lived Mathpix application secret.",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expires\": 300,\n  \"include_strokes_session_id\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"app_token\": \"string\",\n  \"app_token_expires_at\": 1276,\n  \"strokes_session_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mathpix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "app_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ab060504-6890-4cf0-a11d-8143306d2333",
+    "name": "Mathpix App Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.\n\n\nContact Support:\n Name: Mathpix Support\n Email: support@mathpix.com",
+      "type": "text/plain"
+    }
+  }
+}

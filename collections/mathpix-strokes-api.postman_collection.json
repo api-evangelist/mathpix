@@ -1,0 +1,180 @@
+{
+  "item": [
+    {
+      "id": "0cbfc30a-ba01-470c-a3ce-2f62ae1cc023",
+      "name": "Strokes",
+      "description": {
+        "content": "Recognize handwritten math and text from stroke coordinates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5215b8ae-1b08-4a92-98f9-bf10f028585f",
+          "name": "Process Strokes",
+          "request": {
+            "name": "Process Strokes",
+            "description": {
+              "content": "Submit stroke coordinates representing handwriting and receive recognized MMD/LaTeX output.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "strokes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "app_id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "app_key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"strokes\": {\n    \"strokes\": {\n      \"x\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      \"y\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    }\n  },\n  \"strokes_session_id\": \"<string>\",\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": {\n    \"key_0\": 5270.90315373776,\n    \"key_1\": true,\n    \"key_2\": 4884\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9749a255-65a3-4eca-b11d-e0812992e29e",
+              "name": "Recognition result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "strokes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "app_id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "app_id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"strokes\": {\n    \"strokes\": {\n      \"x\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      \"y\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    }\n  },\n  \"strokes_session_id\": \"<string>\",\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": {\n    \"key_0\": 4935.0473780315515,\n    \"key_1\": 4072.914602608766,\n    \"key_2\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"string\",\n  \"text\": \"string\",\n  \"latex_styled\": \"string\",\n  \"confidence\": 3623.35522964887,\n  \"confidence_rate\": 6685.296561414138,\n  \"is_printed\": true,\n  \"is_handwritten\": false,\n  \"auto_rotate_confidence\": 2430.3763931467047,\n  \"auto_rotate_degrees\": 90,\n  \"image_height\": 3855,\n  \"image_width\": 5909,\n  \"data\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 4870.445767311206\n    },\n    {\n      \"key_0\": 4264,\n      \"key_1\": 3115.094799327992,\n      \"key_2\": 5919.151983567313,\n      \"key_3\": \"string\",\n      \"key_4\": 9875\n    }\n  ],\n  \"html\": \"string\",\n  \"version\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mathpix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "app_id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bf679eb4-a4f6-4d2c-81d6-0b5f15b0ef03",
+    "name": "Mathpix Strokes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mathpix v3/strokes endpoint for digital-ink OCR. Submit raw stroke coordinates (x/y arrays) and receive the same MMD/LaTeX/HTML/data output produced by v3/text. Supports session-scoped tokens for live handwriting capture in browsers and tablets.\n\n\nContact Support:\n Name: Mathpix Support\n Email: support@mathpix.com",
+      "type": "text/plain"
+    }
+  }
+}

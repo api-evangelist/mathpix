@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "5bcc45a3-55b3-49ac-8fe1-efbe3bab33fb",
+      "name": "Conversions",
+      "description": {
+        "content": "Convert Mathpix Markdown into export formats.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d357744-7a80-4fba-b53c-f883ddcb2299",
+          "name": "Convert Mathpix Markdown",
+          "request": {
+            "name": "Convert Mathpix Markdown",
+            "description": {
+              "content": "Convert a Mathpix Markdown string into one or more export formats. Returns a conversion_id used to poll status and download outputs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "converter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "app_id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "app_key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mmd\": \"<string>\",\n  \"formats\": {\n    \"docx\": \"<boolean>\",\n    \"tex.zip\": \"<boolean>\",\n    \"html\": \"<boolean>\",\n    \"pdf\": \"<boolean>\",\n    \"pptx\": \"<boolean>\",\n    \"md\": \"<boolean>\",\n    \"latex.pdf\": \"<boolean>\",\n    \"mmd.zip\": \"<boolean>\",\n    \"md.zip\": \"<boolean>\",\n    \"html.zip\": \"<boolean>\"\n  },\n  \"conversion_options\": {\n    \"key_0\": 9438.881157155523,\n    \"key_1\": \"string\",\n    \"key_2\": 5670,\n    \"key_3\": \"string\"\n  },\n  \"metadata\": {\n    \"key_0\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ffc15cd7-af49-4619-94c2-e58387ee8c28",
+              "name": "Conversion job accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "converter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "app_id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "app_id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mmd\": \"<string>\",\n  \"formats\": {\n    \"docx\": \"<boolean>\",\n    \"tex.zip\": \"<boolean>\",\n    \"html\": \"<boolean>\",\n    \"pdf\": \"<boolean>\",\n    \"pptx\": \"<boolean>\",\n    \"md\": \"<boolean>\",\n    \"latex.pdf\": \"<boolean>\",\n    \"mmd.zip\": \"<boolean>\",\n    \"md.zip\": \"<boolean>\",\n    \"html.zip\": \"<boolean>\"\n  },\n  \"conversion_options\": {\n    \"key_0\": 5022.532973927146,\n    \"key_1\": 8285,\n    \"key_2\": \"string\"\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": 1066.0422120580981\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"conversion_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4fa2a505-af21-4218-98a9-1740f440b65b",
+          "name": "Get Conversion Status",
+          "request": {
+            "name": "Get Conversion Status",
+            "description": {
+              "content": "Poll the status of a conversion job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "converter",
+                ":conversion_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversion_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "app_id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "app_key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89dee7ba-72bd-4c19-ab51-e43448256e9b",
+              "name": "Conversion status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "converter",
+                    ":conversion_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversion_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "app_id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "app_id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"processing\",\n  \"conversion_status\": {\n    \"key_0\": {\n      \"key_0\": 5531.17895716978,\n      \"key_1\": false,\n      \"key_2\": 1686,\n      \"key_3\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mathpix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "app_id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7afe512c-26c5-4318-b39d-06acf5ba7575",
+    "name": "Mathpix Convert API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Transform Mathpix Markdown (MMD) into DOCX, LaTeX (.tex.zip), HTML, PDF, PPTX, plain Markdown, and archived multi-file outputs. Submission is synchronous; status and downloads use the returned conversion_id.\n\n\nContact Support:\n Name: Mathpix Support\n Email: support@mathpix.com",
+      "type": "text/plain"
+    }
+  }
+}

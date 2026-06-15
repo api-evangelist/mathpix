@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mathpix OCR Usage API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "app_id",
+      "value": "{{app_id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query OCR Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mathpix.com/v3/ocr-usage",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO datetime lower bound (inclusive)."
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO datetime upper bound (exclusive)."
+              },
+              {
+                "name": "group_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timespan",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Aggregate OCR usage across a time window. Group by usage_type, request_args_hash, or app_id, and pick a timespan such as month, week, day, or hour."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
