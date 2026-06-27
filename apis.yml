@@ -19,7 +19,7 @@ apis:
       - url: json-ld/mathpix-context.jsonld
         type: JSONLD
       - url: examples/mathpix-process-image-example.json
-        type: Example
+        type: Examples
     description: >-
       Submit a single image (by URL or base64) to v3/text and receive Mathpix Markdown plus optional structured data,
       HTML, styled LaTeX, and line- or word-level segmentation. Auto-detects printed vs. handwritten content and handles
@@ -41,7 +41,7 @@ apis:
       - url: json-schema/mathpix-document-result-schema.json
         type: JSONSchema
       - url: examples/mathpix-process-document-example.json
-        type: Example
+        type: Examples
     description: >-
       Asynchronous PDF and document OCR via v3/pdf. Submit by URL or multipart upload, poll status, optionally stream
       via SSE, and download outputs in MMD, Markdown, DOCX, LaTeX (.tex.zip), HTML, PPTX, or per-line JSON. Supports
@@ -62,7 +62,7 @@ apis:
       - url: openapi/mathpix-convert-api-openapi.yml
         type: OpenAPI
       - url: examples/mathpix-convert-markdown-example.json
-        type: Example
+        type: Examples
     description: >-
       Transform Mathpix Markdown into DOCX, LaTeX archives, HTML, PDF, PPTX, plain Markdown, and zipped multi-file
       outputs. Synchronous submission returns a conversion_id used to poll per-format completion and download artifacts.
@@ -79,7 +79,7 @@ apis:
       - url: openapi/mathpix-batch-api-openapi.yml
         type: OpenAPI
       - url: examples/mathpix-batch-example.json
-        type: Example
+        type: Examples
     description: >-
       Submit many image URLs (with optional per-image options) in a single v3/batch request, poll once per ~5 images,
       and retrieve a results map keyed by caller-defined identifiers. Supports optional webhook callbacks.
@@ -97,7 +97,7 @@ apis:
       - url: openapi/mathpix-strokes-api-openapi.yml
         type: OpenAPI
       - url: examples/mathpix-strokes-example.json
-        type: Example
+        type: Examples
     description: >-
       Recognize handwritten math, text, and chemistry from raw stroke coordinates (x/y arrays) via v3/strokes. Pairs
       with the App Tokens API and strokes_session_id for client-side digital-ink capture in browsers and tablets.
@@ -167,7 +167,7 @@ common:
   - type: Pricing
     url: https://mathpix.com/pricing
     name: Pricing
-  - type: SignUp
+  - type: Signup
     url: https://accounts.mathpix.com/signup
     name: Sign Up
   - type: Login
@@ -191,10 +191,10 @@ common:
   - type: PrivacyPolicy
     url: https://mathpix.com/privacy
     name: Privacy Policy
-  - type: SDK
+  - type: SDKs
     url: https://github.com/Mathpix/mpxpy
     name: Python SDK (mpxpy)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/Mathpix/ios-client
     name: iOS Client
   - type: CLI
