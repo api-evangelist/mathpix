@@ -1,0 +1,31 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/mathpix-app-tokens-api-openapi.yml, openapi/mathpix-batch-api-openapi.yml, openapi/mathpix-convert-api-openapi.yml,
+  openapi/mathpix-image-ocr-api-openapi.yml, openapi/mathpix-ocr-usage-api-openapi.yml, openapi/mathpix-strokes-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: AppKeyAuth
+  type: apiKey
+  in: header
+  parameter: app_key
+  sources:
+  - openapi/mathpix-app-tokens-api-openapi.yml
+  - openapi/mathpix-batch-api-openapi.yml
+  - openapi/mathpix-convert-api-openapi.yml
+  - openapi/mathpix-image-ocr-api-openapi.yml
+  - openapi/mathpix-ocr-usage-api-openapi.yml
+  - openapi/mathpix-strokes-api-openapi.yml
+- name: AppIdAuth
+  type: apiKey
+  in: header
+  parameter: app_id
+  sources:
+  - openapi/mathpix-batch-api-openapi.yml
+  - openapi/mathpix-convert-api-openapi.yml
+  - openapi/mathpix-image-ocr-api-openapi.yml
+  - openapi/mathpix-ocr-usage-api-openapi.yml
+  - openapi/mathpix-strokes-api-openapi.yml
