@@ -1,10 +1,9 @@
 openapi: 3.1.0
 info:
-  title: Mathpix Convert API
-  description: >
-    Transform Mathpix Markdown (MMD) into DOCX, LaTeX (.tex.zip), HTML, PDF, PPTX, plain Markdown,
-    and archived multi-file outputs. Submission is synchronous; status and downloads use the returned
-    conversion_id.
+  title: Mathpix App Tokens Conversions API
+  description: 'Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.
+
+    '
   version: v3
   contact:
     name: Mathpix Support
@@ -14,14 +13,13 @@ info:
     name: Mathpix Terms of Service
     url: https://mathpix.com/terms-of-service
 servers:
-  - url: https://api.mathpix.com
-    description: Production Server
+- url: https://api.mathpix.com
+  description: Production Server
 security:
-  - AppIdAuth: []
-    AppKeyAuth: []
+- AppKeyAuth: []
 tags:
-  - name: Conversions
-    description: Convert Mathpix Markdown into export formats.
+- name: Conversions
+  description: Convert Mathpix Markdown into export formats.
 paths:
   /v3/converter:
     post:
@@ -29,11 +27,11 @@ paths:
       description: Convert a Mathpix Markdown string into one or more export formats. Returns a conversion_id used to poll status and download outputs.
       operationId: convertMarkdown
       tags:
-        - Conversions
+      - Conversions
       parameters:
-        - $ref: '#/components/parameters/AppIdHeader'
-        - $ref: '#/components/parameters/AppKeyHeader'
-        - $ref: '#/components/parameters/ContentTypeHeader'
+      - $ref: '#/components/parameters/AppIdHeader'
+      - $ref: '#/components/parameters/AppKeyHeader'
+      - $ref: '#/components/parameters/ContentTypeHeader'
       requestBody:
         required: true
         content:
@@ -53,15 +51,15 @@ paths:
       description: Poll the status of a conversion job.
       operationId: getConversionStatus
       tags:
-        - Conversions
+      - Conversions
       parameters:
-        - $ref: '#/components/parameters/AppIdHeader'
-        - $ref: '#/components/parameters/AppKeyHeader'
-        - name: conversion_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AppIdHeader'
+      - $ref: '#/components/parameters/AppKeyHeader'
+      - name: conversion_id
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Conversion status.
@@ -70,28 +68,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConversionStatus'
 components:
-  securitySchemes:
-    AppIdAuth:
-      type: apiKey
-      in: header
-      name: app_id
-    AppKeyAuth:
-      type: apiKey
-      in: header
-      name: app_key
   parameters:
-    AppIdHeader:
-      name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
     ContentTypeHeader:
       name: Content-Type
       in: header
@@ -99,10 +76,23 @@ components:
       schema:
         type: string
         default: application/json
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
   schemas:
     ConvertRequest:
       type: object
-      required: [mmd]
+      required:
+      - mmd
       properties:
         mmd:
           type: string
@@ -113,7 +103,7 @@ components:
           properties:
             docx:
               type: boolean
-            'tex.zip':
+            tex.zip:
               type: boolean
             html:
               type: boolean
@@ -123,13 +113,13 @@ components:
               type: boolean
             md:
               type: boolean
-            'latex.pdf':
+            latex.pdf:
               type: boolean
-            'mmd.zip':
+            mmd.zip:
               type: boolean
-            'md.zip':
+            md.zip:
               type: boolean
-            'html.zip':
+            html.zip:
               type: boolean
         conversion_options:
           type: object
@@ -148,10 +138,18 @@ components:
       properties:
         status:
           type: string
-          enum: [processing, completed, error]
+          enum:
+          - processing
+          - completed
+          - error
         conversion_status:
           type: object
           description: Per-format conversion progress map.
           additionalProperties:
             type: object
             additionalProperties: true
+  securitySchemes:
+    AppKeyAuth:
+      type: apiKey
+      in: header
+      name: app_key

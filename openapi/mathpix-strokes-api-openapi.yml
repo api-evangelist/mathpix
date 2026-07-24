@@ -1,10 +1,9 @@
 openapi: 3.1.0
 info:
-  title: Mathpix Strokes API
-  description: >
-    Mathpix v3/strokes endpoint for digital-ink OCR. Submit raw stroke coordinates (x/y arrays) and
-    receive the same MMD/LaTeX/HTML/data output produced by v3/text. Supports session-scoped tokens
-    for live handwriting capture in browsers and tablets.
+  title: Mathpix App Tokens Strokes API
+  description: 'Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.
+
+    '
   version: v3
   contact:
     name: Mathpix Support
@@ -14,14 +13,13 @@ info:
     name: Mathpix Terms of Service
     url: https://mathpix.com/terms-of-service
 servers:
-  - url: https://api.mathpix.com
-    description: Production Server
+- url: https://api.mathpix.com
+  description: Production Server
 security:
-  - AppIdAuth: []
-    AppKeyAuth: []
+- AppKeyAuth: []
 tags:
-  - name: Strokes
-    description: Recognize handwritten math and text from stroke coordinates.
+- name: Strokes
+  description: Recognize handwritten math and text from stroke coordinates.
 paths:
   /v3/strokes:
     post:
@@ -29,11 +27,11 @@ paths:
       description: Submit stroke coordinates representing handwriting and receive recognized MMD/LaTeX output.
       operationId: processStrokes
       tags:
-        - Strokes
+      - Strokes
       parameters:
-        - $ref: '#/components/parameters/AppIdHeader'
-        - $ref: '#/components/parameters/AppKeyHeader'
-        - $ref: '#/components/parameters/ContentTypeHeader'
+      - $ref: '#/components/parameters/AppIdHeader'
+      - $ref: '#/components/parameters/AppKeyHeader'
+      - $ref: '#/components/parameters/ContentTypeHeader'
       requestBody:
         required: true
         content:
@@ -48,28 +46,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/StrokesResponse'
 components:
-  securitySchemes:
-    AppIdAuth:
-      type: apiKey
-      in: header
-      name: app_id
-    AppKeyAuth:
-      type: apiKey
-      in: header
-      name: app_key
   parameters:
-    AppIdHeader:
-      name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
     ContentTypeHeader:
       name: Content-Type
       in: header
@@ -77,44 +54,19 @@ components:
       schema:
         type: string
         default: application/json
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
   schemas:
-    StrokesRequest:
-      type: object
-      required: [strokes]
-      properties:
-        strokes:
-          type: object
-          required: [strokes]
-          properties:
-            strokes:
-              type: object
-              required: [x, y]
-              properties:
-                x:
-                  type: array
-                  description: Array of x-coordinate arrays, one inner array per stroke.
-                  items:
-                    type: array
-                    items:
-                      type: number
-                y:
-                  type: array
-                  description: Array of y-coordinate arrays, one inner array per stroke.
-                  items:
-                    type: array
-                    items:
-                      type: number
-        strokes_session_id:
-          type: string
-          description: Session identifier for client-side digital-ink capture.
-        formats:
-          type: array
-          items:
-            type: string
-            enum: [text, data, html, latex_styled]
-        metadata:
-          type: object
-          additionalProperties: true
     StrokesResponse:
       type: object
       properties:
@@ -139,7 +91,11 @@ components:
           format: float
         auto_rotate_degrees:
           type: integer
-          enum: [0, 90, -90, 180]
+          enum:
+          - 0
+          - 90
+          - -90
+          - 180
         image_height:
           type: integer
         image_width:
@@ -153,3 +109,53 @@ components:
           type: string
         version:
           type: string
+    StrokesRequest:
+      type: object
+      required:
+      - strokes
+      properties:
+        strokes:
+          type: object
+          required:
+          - strokes
+          properties:
+            strokes:
+              type: object
+              required:
+              - x
+              - y
+              properties:
+                x:
+                  type: array
+                  description: Array of x-coordinate arrays, one inner array per stroke.
+                  items:
+                    type: array
+                    items:
+                      type: number
+                y:
+                  type: array
+                  description: Array of y-coordinate arrays, one inner array per stroke.
+                  items:
+                    type: array
+                    items:
+                      type: number
+        strokes_session_id:
+          type: string
+          description: Session identifier for client-side digital-ink capture.
+        formats:
+          type: array
+          items:
+            type: string
+            enum:
+            - text
+            - data
+            - html
+            - latex_styled
+        metadata:
+          type: object
+          additionalProperties: true
+  securitySchemes:
+    AppKeyAuth:
+      type: apiKey
+      in: header
+      name: app_key

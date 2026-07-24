@@ -1,10 +1,9 @@
 openapi: 3.1.0
 info:
   title: Mathpix App Tokens API
-  description: >
-    Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call
-    Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued
-    from 30 seconds to 12 hours. Token issuance is free.
+  description: 'Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.
+
+    '
   version: v3
   contact:
     name: Mathpix Support
@@ -14,13 +13,13 @@ info:
     name: Mathpix Terms of Service
     url: https://mathpix.com/terms-of-service
 servers:
-  - url: https://api.mathpix.com
-    description: Production Server
+- url: https://api.mathpix.com
+  description: Production Server
 security:
-  - AppKeyAuth: []
+- AppKeyAuth: []
 tags:
-  - name: App Tokens
-    description: Issue temporary client-side tokens.
+- name: App Tokens
+  description: Issue temporary client-side tokens.
 paths:
   /v3/app-tokens:
     post:
@@ -28,20 +27,20 @@ paths:
       description: Mint a temporary app_token for client-side use. Authenticated with the long-lived app_key only.
       operationId: createAppToken
       tags:
-        - App Tokens
+      - App Tokens
       parameters:
-        - name: app_key
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Long-lived Mathpix application secret.
-        - name: Content-Type
-          in: header
-          required: true
-          schema:
-            type: string
-            default: application/json
+      - name: app_key
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Long-lived Mathpix application secret.
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+          default: application/json
       requestBody:
         required: false
         content:
@@ -56,11 +55,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/AppTokenResponse'
 components:
-  securitySchemes:
-    AppKeyAuth:
-      type: apiKey
-      in: header
-      name: app_key
   schemas:
     AppTokenRequest:
       type: object
@@ -86,3 +80,8 @@ components:
         strokes_session_id:
           type: string
           description: Optional session identifier for digital-ink workflows.
+  securitySchemes:
+    AppKeyAuth:
+      type: apiKey
+      in: header
+      name: app_key
