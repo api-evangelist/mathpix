@@ -1,0 +1,300 @@
+{
+  "info": {
+    "_postman_id": "f708596e-7694-4b88-95a7-b14503a8fdfb",
+    "name": "Mathpix App Tokens Batches API",
+    "description": "Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.\n\n\nContact Support:\n Name: Mathpix Support\n Email: support@mathpix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:58:18.000Z",
+    "updatedAt": "2026-07-28T10:58:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f708596e-7694-4b88-95a7-b14503a8fdfb"
+  },
+  "item": [
+    {
+      "name": "v3",
+      "item": [
+        {
+          "name": "batch",
+          "item": [
+            {
+              "name": "{batch_id}",
+              "item": [
+                {
+                  "name": "Get Batch Results",
+                  "id": "56b11c97-33d4-49e4-a0f9-4497af2c2c99",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "app_id",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) ",
+                        "key": "app_key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v3/batch/:batch_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v3",
+                        "batch",
+                        ":batch_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c8a912b4-3e7a-4997-9e22-031b80f22c00",
+                          "key": "batch_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieve OCR results for the batch. Mathpix recommends waiting approximately one second per five images before polling."
+                  },
+                  "response": [
+                    {
+                      "id": "bb9c9aea-922a-4424-9640-2d5e20ffaee3",
+                      "name": "Batch results (may be partial).",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "app_id",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) ",
+                            "key": "app_key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "app_key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v3/batch/:batch_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v3",
+                            "batch",
+                            ":batch_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "batch_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"results\": {\n    \"iruree42\": \"sed ex elit\",\n    \"laborumea2\": 60102005.9192206\n  }\n}",
+                      "createdAt": "2026-07-28T10:58:18.000Z",
+                      "updatedAt": "2026-07-28T10:58:18.000Z",
+                      "uid": "35240-bb9c9aea-922a-4424-9640-2d5e20ffaee3"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T10:58:18.000Z",
+                  "updatedAt": "2026-07-28T10:58:18.000Z",
+                  "uid": "35240-56b11c97-33d4-49e4-a0f9-4497af2c2c99"
+                }
+              ],
+              "id": "0b94e5c1-91d6-4ecd-99e5-2edb522c9036",
+              "createdAt": "2026-07-28T10:58:18.000Z",
+              "updatedAt": "2026-07-28T10:58:18.000Z",
+              "uid": "35240-0b94e5c1-91d6-4ecd-99e5-2edb522c9036"
+            },
+            {
+              "name": "Submit A Batch",
+              "id": "ff0bed88-2843-4a4b-a7b5-0846602c1601",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "app_id",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) ",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"urls\": {\n    \"sit_9a7\": \"<uri>\",\n    \"mollit_b\": \"<uri>\"\n  },\n  \"formats\": [\n    \"text\",\n    \"text\"\n  ],\n  \"ocr_behavior\": \"latex\",\n  \"callback\": {\n    \"reprehenderit_c52\": \"in minim proident Duis\",\n    \"sunt_071\": -66454734,\n    \"commodo27\": false\n  },\n  \"metadata\": {\n    \"irure66\": -21632880\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v3/batch",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "batch"
+                  ]
+                },
+                "description": "Submit a batch of image URLs (with optional per-image options) for OCR. Poll results using the returned batch_id."
+              },
+              "response": [
+                {
+                  "id": "1fe7685c-655b-461e-a7a2-5e201c980232",
+                  "name": "Batch accepted.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "app_id",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) ",
+                        "key": "app_key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "app_key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"urls\": {\n    \"sit_9a7\": \"<uri>\",\n    \"mollit_b\": \"<uri>\"\n  },\n  \"formats\": [\n    \"text\",\n    \"text\"\n  ],\n  \"ocr_behavior\": \"latex\",\n  \"callback\": {\n    \"reprehenderit_c52\": \"in minim proident Duis\",\n    \"sunt_071\": -66454734,\n    \"commodo27\": false\n  },\n  \"metadata\": {\n    \"irure66\": -21632880\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v3/batch",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v3",
+                        "batch"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batch_id\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T10:58:18.000Z",
+                  "updatedAt": "2026-07-28T10:58:18.000Z",
+                  "uid": "35240-1fe7685c-655b-461e-a7a2-5e201c980232"
+                }
+              ],
+              "createdAt": "2026-07-28T10:58:18.000Z",
+              "updatedAt": "2026-07-28T10:58:18.000Z",
+              "uid": "35240-ff0bed88-2843-4a4b-a7b5-0846602c1601"
+            }
+          ],
+          "id": "24014f60-59fd-4a07-bfbe-c6612663e044",
+          "createdAt": "2026-07-28T10:58:18.000Z",
+          "updatedAt": "2026-07-28T10:58:18.000Z",
+          "uid": "35240-24014f60-59fd-4a07-bfbe-c6612663e044"
+        }
+      ],
+      "id": "a4dfcc4d-a9f1-43b3-be6a-80a5b63261a0",
+      "createdAt": "2026-07-28T10:58:18.000Z",
+      "updatedAt": "2026-07-28T10:58:18.000Z",
+      "uid": "35240-a4dfcc4d-a9f1-43b3-be6a-80a5b63261a0"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "app_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mathpix.com"
+    }
+  ]
+}

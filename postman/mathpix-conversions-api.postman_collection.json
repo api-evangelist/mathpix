@@ -1,0 +1,300 @@
+{
+  "info": {
+    "_postman_id": "7e5418c8-2e81-4178-86f0-7618401a0f58",
+    "name": "Mathpix App Tokens Conversions API",
+    "description": "Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.\n\n\nContact Support:\n Name: Mathpix Support\n Email: support@mathpix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:58:19.000Z",
+    "updatedAt": "2026-07-28T10:58:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7e5418c8-2e81-4178-86f0-7618401a0f58"
+  },
+  "item": [
+    {
+      "name": "v3",
+      "item": [
+        {
+          "name": "converter",
+          "item": [
+            {
+              "name": "{conversion_id}",
+              "item": [
+                {
+                  "name": "Get Conversion Status",
+                  "id": "4c48c8b4-a430-4f3e-a5a0-4c314ce10c3a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "app_id",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) ",
+                        "key": "app_key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v3/converter/:conversion_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v3",
+                        "converter",
+                        ":conversion_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e50d60c8-4a7a-4fc4-80f7-9f0178fc28d6",
+                          "key": "conversion_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Poll the status of a conversion job."
+                  },
+                  "response": [
+                    {
+                      "id": "1ba3059d-d768-4b46-9caa-299600bb7716",
+                      "name": "Conversion status.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "app_id",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) ",
+                            "key": "app_key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "app_key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v3/converter/:conversion_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v3",
+                            "converter",
+                            ":conversion_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "conversion_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"processing\",\n  \"conversion_status\": {\n    \"aliquab8\": {\n      \"veniam0\": -920509,\n      \"eiusmod_dd\": \"ut velit\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T10:58:19.000Z",
+                      "updatedAt": "2026-07-28T10:58:19.000Z",
+                      "uid": "35240-1ba3059d-d768-4b46-9caa-299600bb7716"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T10:58:19.000Z",
+                  "updatedAt": "2026-07-28T10:58:19.000Z",
+                  "uid": "35240-4c48c8b4-a430-4f3e-a5a0-4c314ce10c3a"
+                }
+              ],
+              "id": "cc2a3fc8-af21-4c7d-8222-0ef580d2cbce",
+              "createdAt": "2026-07-28T10:58:19.000Z",
+              "updatedAt": "2026-07-28T10:58:19.000Z",
+              "uid": "35240-cc2a3fc8-af21-4c7d-8222-0ef580d2cbce"
+            },
+            {
+              "name": "Convert Mathpix Markdown",
+              "id": "830d59ec-d18a-4af1-90ae-3d5853bc60b3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "app_id",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) ",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mmd\": \"<string>\",\n  \"formats\": {\n    \"docx\": \"<boolean>\",\n    \"tex.zip\": \"<boolean>\",\n    \"html\": \"<boolean>\",\n    \"pdf\": \"<boolean>\",\n    \"pptx\": \"<boolean>\",\n    \"md\": \"<boolean>\",\n    \"latex.pdf\": \"<boolean>\",\n    \"mmd.zip\": \"<boolean>\",\n    \"md.zip\": \"<boolean>\",\n    \"html.zip\": \"<boolean>\"\n  },\n  \"conversion_options\": {\n    \"elit_c\": false\n  },\n  \"metadata\": {\n    \"nullab9e\": true,\n    \"esse579\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v3/converter",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "converter"
+                  ]
+                },
+                "description": "Convert a Mathpix Markdown string into one or more export formats. Returns a conversion_id used to poll status and download outputs."
+              },
+              "response": [
+                {
+                  "id": "b83cc391-62d8-4b40-8d25-5e930d8006e4",
+                  "name": "Conversion job accepted.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "app_id",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) ",
+                        "key": "app_key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "app_key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"mmd\": \"<string>\",\n  \"formats\": {\n    \"docx\": \"<boolean>\",\n    \"tex.zip\": \"<boolean>\",\n    \"html\": \"<boolean>\",\n    \"pdf\": \"<boolean>\",\n    \"pptx\": \"<boolean>\",\n    \"md\": \"<boolean>\",\n    \"latex.pdf\": \"<boolean>\",\n    \"mmd.zip\": \"<boolean>\",\n    \"md.zip\": \"<boolean>\",\n    \"html.zip\": \"<boolean>\"\n  },\n  \"conversion_options\": {\n    \"elit_c\": false\n  },\n  \"metadata\": {\n    \"nullab9e\": true,\n    \"esse579\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v3/converter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v3",
+                        "converter"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"conversion_id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T10:58:19.000Z",
+                  "updatedAt": "2026-07-28T10:58:19.000Z",
+                  "uid": "35240-b83cc391-62d8-4b40-8d25-5e930d8006e4"
+                }
+              ],
+              "createdAt": "2026-07-28T10:58:19.000Z",
+              "updatedAt": "2026-07-28T10:58:19.000Z",
+              "uid": "35240-830d59ec-d18a-4af1-90ae-3d5853bc60b3"
+            }
+          ],
+          "id": "335a6cbd-871c-40a7-a7d3-d55aabda8467",
+          "createdAt": "2026-07-28T10:58:19.000Z",
+          "updatedAt": "2026-07-28T10:58:19.000Z",
+          "uid": "35240-335a6cbd-871c-40a7-a7d3-d55aabda8467"
+        }
+      ],
+      "id": "fc1e3c5d-67c5-41b5-8ccb-fd6cce303b59",
+      "createdAt": "2026-07-28T10:58:19.000Z",
+      "updatedAt": "2026-07-28T10:58:19.000Z",
+      "uid": "35240-fc1e3c5d-67c5-41b5-8ccb-fd6cce303b59"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "app_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mathpix.com"
+    }
+  ]
+}

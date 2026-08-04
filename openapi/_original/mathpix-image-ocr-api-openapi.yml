@@ -1,0 +1,197 @@
+openapi: 3.1.0
+info:
+  title: Mathpix Image OCR API
+  description: >
+    Mathpix v3/text endpoint for STEM image OCR. Recognizes printed and handwritten math, text,
+    tables, and chemistry diagrams from a single image and returns Mathpix Markdown (MMD) plus
+    optional structured data, HTML, line- and word-level segmentation, and styled LaTeX.
+  version: v3
+  contact:
+    name: Mathpix Support
+    url: https://docs.mathpix.com
+    email: support@mathpix.com
+  license:
+    name: Mathpix Terms of Service
+    url: https://mathpix.com/terms-of-service
+servers:
+  - url: https://api.mathpix.com
+    description: Production Server
+security:
+  - AppIdAuth: []
+    AppKeyAuth: []
+tags:
+  - name: Images
+    description: Process a single image for STEM OCR.
+paths:
+  /v3/text:
+    post:
+      summary: Process An Image
+      description: >
+        Submit a single image (by URL or base64) and receive Mathpix Markdown (MMD) plus optional
+        structured data, HTML, styled LaTeX, line data, and word data. Auto-detects whether the
+        content is printed or handwritten.
+      operationId: processImage
+      tags:
+        - Images
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/ContentTypeHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextRequest'
+      responses:
+        '200':
+          description: Successful OCR result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextResponse'
+        '401':
+          description: Missing or invalid credentials.
+        '429':
+          description: Rate limit exceeded.
+components:
+  securitySchemes:
+    AppIdAuth:
+      type: apiKey
+      in: header
+      name: app_id
+    AppKeyAuth:
+      type: apiKey
+      in: header
+      name: app_key
+  parameters:
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Mathpix application identifier issued at console.mathpix.com.
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Mathpix application secret issued at console.mathpix.com.
+    ContentTypeHeader:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+  schemas:
+    TextRequest:
+      type: object
+      description: Single-image OCR request body.
+      properties:
+        src:
+          type: string
+          description: Image URL or base64-encoded image (e.g. data:image/png;base64,...).
+        metadata:
+          type: object
+          description: Free-form key/value metadata stored with the request for privacy and audit.
+          additionalProperties: true
+        formats:
+          type: array
+          description: Output formats requested in addition to MMD. Supported values include text, data, html, latex_styled.
+          items:
+            type: string
+            enum: [text, data, html, latex_styled]
+        math_inline_delimiters:
+          type: array
+          description: Custom delimiters for inline math, e.g. ["\\(", "\\)"].
+          items:
+            type: string
+        math_display_delimiters:
+          type: array
+          description: Custom delimiters for display math, e.g. ["\\[", "\\]"].
+          items:
+            type: string
+        include_line_data:
+          type: boolean
+          description: Include line-by-line segmentation in the response.
+          default: false
+        include_word_data:
+          type: boolean
+          description: Include word-level segmentation in the response.
+          default: false
+        rm_spaces:
+          type: boolean
+          description: Strip extra whitespace inside equations.
+          default: true
+        confidence_threshold:
+          type: number
+          format: float
+          description: Minimum confidence threshold (0.0 - 1.0) below which results are rejected.
+          minimum: 0.0
+          maximum: 1.0
+    TextResponse:
+      type: object
+      description: OCR response containing recognized content and confidence metrics.
+      properties:
+        request_id:
+          type: string
+          description: Unique identifier for debugging.
+        text:
+          type: string
+          description: Recognized content in Mathpix Markdown.
+        latex_styled:
+          type: string
+          description: Styled LaTeX equivalent when latex_styled is requested.
+        html:
+          type: string
+          description: HTML rendering when html is requested.
+        data:
+          type: array
+          description: Structured data extracted from the image.
+          items:
+            type: object
+            additionalProperties: true
+        confidence:
+          type: number
+          format: float
+          description: Probability of 100% accuracy in the range 0.0 - 1.0.
+        confidence_rate:
+          type: number
+          format: float
+          description: Output quality confidence in the range 0.0 - 1.0.
+        is_printed:
+          type: boolean
+          description: True when printed content was detected.
+        is_handwritten:
+          type: boolean
+          description: True when handwritten content was detected.
+        auto_rotate_confidence:
+          type: number
+          format: float
+        auto_rotate_degrees:
+          type: integer
+          enum: [0, 90, -90, 180]
+        image_height:
+          type: integer
+        image_width:
+          type: integer
+        line_data:
+          type: array
+          description: Per-line segmentation when include_line_data=true.
+          items:
+            type: object
+            additionalProperties: true
+        word_data:
+          type: array
+          description: Per-word segmentation when include_word_data=true.
+          items:
+            type: object
+            additionalProperties: true
+        version:
+          type: string
+        error:
+          type: string
+          description: Error message if processing failed.

@@ -1,0 +1,181 @@
+{
+  "info": {
+    "_postman_id": "4c8c46a4-9821-4c6c-bf9c-837677f959a6",
+    "name": "Mathpix App Tokens Strokes API",
+    "description": "Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.\n\n\nContact Support:\n Name: Mathpix Support\n Email: support@mathpix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:58:01.000Z",
+    "updatedAt": "2026-07-28T10:58:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4c8c46a4-9821-4c6c-bf9c-837677f959a6"
+  },
+  "item": [
+    {
+      "name": "v3",
+      "item": [
+        {
+          "name": "strokes",
+          "item": [
+            {
+              "name": "Process Strokes",
+              "id": "ac8f5477-d67a-4837-8144-e8ca610975e6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "app_id",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) ",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"strokes\": {\n    \"strokes\": {\n      \"x\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      \"y\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    }\n  },\n  \"strokes_session_id\": \"<string>\",\n  \"formats\": [\n    \"data\",\n    \"text\"\n  ],\n  \"metadata\": {\n    \"in_d0b\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v3/strokes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "strokes"
+                  ]
+                },
+                "description": "Submit stroke coordinates representing handwriting and receive recognized MMD/LaTeX output."
+              },
+              "response": [
+                {
+                  "id": "249f1391-74d7-4e72-9164-9ad1de2071a3",
+                  "name": "Recognition result.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "app_id",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) ",
+                        "key": "app_key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "app_key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"strokes\": {\n    \"strokes\": {\n      \"x\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      \"y\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    }\n  },\n  \"strokes_session_id\": \"<string>\",\n  \"formats\": [\n    \"data\",\n    \"text\"\n  ],\n  \"metadata\": {\n    \"in_d0b\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v3/strokes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v3",
+                        "strokes"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"request_id\": \"<string>\",\n  \"text\": \"<string>\",\n  \"latex_styled\": \"<string>\",\n  \"confidence\": \"<float>\",\n  \"confidence_rate\": \"<float>\",\n  \"is_printed\": \"<boolean>\",\n  \"is_handwritten\": \"<boolean>\",\n  \"auto_rotate_confidence\": \"<float>\",\n  \"auto_rotate_degrees\": 180,\n  \"image_height\": \"<integer>\",\n  \"image_width\": \"<integer>\",\n  \"data\": [\n    {\n      \"ea_047\": -26254730.663584083\n    },\n    {\n      \"Ut861\": true,\n      \"ina59\": -79471480.18391368\n    }\n  ],\n  \"html\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T10:58:01.000Z",
+                  "updatedAt": "2026-07-28T10:58:01.000Z",
+                  "uid": "35240-249f1391-74d7-4e72-9164-9ad1de2071a3"
+                }
+              ],
+              "createdAt": "2026-07-28T10:58:01.000Z",
+              "updatedAt": "2026-07-28T10:58:01.000Z",
+              "uid": "35240-ac8f5477-d67a-4837-8144-e8ca610975e6"
+            }
+          ],
+          "id": "5468ab1d-b955-4e81-a3ab-cb3c51519df4",
+          "createdAt": "2026-07-28T10:58:01.000Z",
+          "updatedAt": "2026-07-28T10:58:01.000Z",
+          "uid": "35240-5468ab1d-b955-4e81-a3ab-cb3c51519df4"
+        }
+      ],
+      "id": "a3193fda-1036-4148-80cf-37dca0d3a002",
+      "createdAt": "2026-07-28T10:58:01.000Z",
+      "updatedAt": "2026-07-28T10:58:01.000Z",
+      "uid": "35240-a3193fda-1036-4148-80cf-37dca0d3a002"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "app_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mathpix.com"
+    }
+  ]
+}

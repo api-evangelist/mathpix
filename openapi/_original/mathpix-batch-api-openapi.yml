@@ -1,0 +1,148 @@
+openapi: 3.1.0
+info:
+  title: Mathpix Batch API
+  description: >
+    Submit many images for OCR in a single request. Each batch returns a batch_id that can be polled
+    to retrieve per-image results.
+  version: v3
+  contact:
+    name: Mathpix Support
+    url: https://docs.mathpix.com
+    email: support@mathpix.com
+  license:
+    name: Mathpix Terms of Service
+    url: https://mathpix.com/terms-of-service
+servers:
+  - url: https://api.mathpix.com
+    description: Production Server
+security:
+  - AppIdAuth: []
+    AppKeyAuth: []
+tags:
+  - name: Batches
+    description: Process multiple images in one request.
+paths:
+  /v3/batch:
+    post:
+      summary: Submit A Batch
+      description: Submit a batch of image URLs (with optional per-image options) for OCR. Poll results using the returned batch_id.
+      operationId: submitBatch
+      tags:
+        - Batches
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - $ref: '#/components/parameters/ContentTypeHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchRequest'
+      responses:
+        '200':
+          description: Batch accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchSubmitResponse'
+  /v3/batch/{batch_id}:
+    get:
+      summary: Get Batch Results
+      description: Retrieve OCR results for the batch. Mathpix recommends waiting approximately one second per five images before polling.
+      operationId: getBatchResults
+      tags:
+        - Batches
+      parameters:
+        - $ref: '#/components/parameters/AppIdHeader'
+        - $ref: '#/components/parameters/AppKeyHeader'
+        - name: batch_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Batch results (may be partial).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResultsResponse'
+components:
+  securitySchemes:
+    AppIdAuth:
+      type: apiKey
+      in: header
+      name: app_id
+    AppKeyAuth:
+      type: apiKey
+      in: header
+      name: app_key
+  parameters:
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    ContentTypeHeader:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+  schemas:
+    BatchRequest:
+      type: object
+      required: [urls]
+      properties:
+        urls:
+          type: object
+          description: >
+            Map of caller-defined keys to either an image URL string or an object containing url plus
+            image-specific OCR options (the v3/text request fields).
+          additionalProperties:
+            oneOf:
+              - type: string
+                format: uri
+              - type: object
+                additionalProperties: true
+        formats:
+          type: array
+          items:
+            type: string
+            enum: [text, data, html, latex_styled]
+        ocr_behavior:
+          type: string
+          enum: [text, latex]
+          default: latex
+        callback:
+          type: object
+          description: Optional webhook callback definition with post URL and reply settings.
+          additionalProperties: true
+        metadata:
+          type: object
+          additionalProperties: true
+    BatchSubmitResponse:
+      type: object
+      properties:
+        batch_id:
+          type: integer
+    BatchResultsResponse:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            type: string
+        results:
+          type: object
+          description: Map of submitted key -> per-image OCR result object.
+          additionalProperties: true

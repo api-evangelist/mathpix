@@ -1,0 +1,171 @@
+{
+  "info": {
+    "_postman_id": "dec117c3-e175-442d-8cf7-f775374423ce",
+    "name": "Mathpix App Tokens API",
+    "description": "Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.\n\n\nContact Support:\n Name: Mathpix Support\n Email: support@mathpix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:58:17.000Z",
+    "updatedAt": "2026-07-28T10:58:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-dec117c3-e175-442d-8cf7-f775374423ce"
+  },
+  "item": [
+    {
+      "name": "v3",
+      "item": [
+        {
+          "name": "app-tokens",
+          "item": [
+            {
+              "name": "Create An App Token",
+              "id": "75c82550-bc00-4f33-b9b5-4f29038776cf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Long-lived Mathpix application secret.",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expires\": 300,\n  \"include_strokes_session_id\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v3/app-tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v3",
+                    "app-tokens"
+                  ]
+                },
+                "description": "Mint a temporary app_token for client-side use. Authenticated with the long-lived app_key only."
+              },
+              "response": [
+                {
+                  "id": "0ad24611-7646-4380-b622-7fefcf8975ab",
+                  "name": "Token issued.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) Long-lived Mathpix application secret.",
+                        "key": "app_key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "app_key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"expires\": 300,\n  \"include_strokes_session_id\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v3/app-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v3",
+                        "app-tokens"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"app_token\": \"<string>\",\n  \"app_token_expires_at\": \"<integer>\",\n  \"strokes_session_id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T10:58:17.000Z",
+                  "updatedAt": "2026-07-28T10:58:17.000Z",
+                  "uid": "35240-0ad24611-7646-4380-b622-7fefcf8975ab"
+                }
+              ],
+              "createdAt": "2026-07-28T10:58:17.000Z",
+              "updatedAt": "2026-07-28T10:58:17.000Z",
+              "uid": "35240-75c82550-bc00-4f33-b9b5-4f29038776cf"
+            }
+          ],
+          "id": "991185c9-6192-4ea9-9a42-7bfad1a3b9be",
+          "createdAt": "2026-07-28T10:58:17.000Z",
+          "updatedAt": "2026-07-28T10:58:17.000Z",
+          "uid": "35240-991185c9-6192-4ea9-9a42-7bfad1a3b9be"
+        }
+      ],
+      "id": "4cb62552-8e50-4103-b5c9-c1c35a1d6cfe",
+      "createdAt": "2026-07-28T10:58:17.000Z",
+      "updatedAt": "2026-07-28T10:58:17.000Z",
+      "uid": "35240-4cb62552-8e50-4103-b5c9-c1c35a1d6cfe"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "app_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mathpix.com"
+    }
+  ]
+}

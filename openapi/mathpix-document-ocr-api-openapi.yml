@@ -281,7 +281,7 @@ components:
           additionalProperties: true
         alphabets_allowed:
           type: object
-          description: Restrict the OCR output to specific alphabets (e.g. {"en": true, "ru": false}).
+          description: "Restrict the OCR output to specific alphabets (e.g. {\"en\": true, \"ru\": false})."
           additionalProperties:
             type: boolean
         rm_spaces:
@@ -309,7 +309,7 @@ components:
           description: Comma-separated page selection (e.g. "2,4-6").
         conversion_formats:
           type: object
-          description: Output formats to generate, e.g. {"docx": true, "tex.zip": true, "md": true, "html": true, "pptx": true}.
+          description: "Output formats to generate, e.g. {\"docx\": true, \"tex.zip\": true, \"md\": true, \"html\": true, \"pptx\": true}."
           additionalProperties:
             type: boolean
         conversion_options:
@@ -336,7 +336,7 @@ components:
           type: string
         conversion_status:
           type: object
-          description: Per-format conversion progress map (e.g. {"docx": {"status": "completed"}}).
+          description: "Per-format conversion progress map (e.g. {\"docx\": {\"status\": \"completed\"}})."
           additionalProperties:
             type: object
             additionalProperties: true

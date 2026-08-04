@@ -1,0 +1,26 @@
+{
+  "provider": "mathpix",
+  "sources": [
+    "mathpix-app-tokens-api-openapi.yml",
+    "mathpix-batches-api-openapi.yml",
+    "mathpix-conversions-api-openapi.yml",
+    "mathpix-images-api-openapi.yml",
+    "mathpix-strokes-api-openapi.yml",
+    "mathpix-usage-api-openapi.yml"
+  ],
+  "outputs": [
+    "mathpix-app-tokens-api-openapi.yml",
+    "mathpix-batches-api-openapi.yml",
+    "mathpix-conversions-api-openapi.yml",
+    "mathpix-images-api-openapi.yml",
+    "mathpix-strokes-api-openapi.yml",
+    "mathpix-usage-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": [
+    "mathpix-document-ocr-api-openapi.yml: parse error ScannerError: mapping values are not allowed here"
+  ]
+}
