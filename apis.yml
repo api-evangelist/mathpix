@@ -1,29 +1,6 @@
 aid: mathpix
 url: https://raw.githubusercontent.com/api-evangelist/mathpix/refs/heads/main/apis.yml
 apis:
-- aid: mathpix:mathpix-document-ocr-api
-  name: Mathpix Document OCR API
-  tags:
-  - OCR
-  - PDF
-  - Documents
-  - STEM
-  - Conversion
-  humanURL: https://docs.mathpix.com/reference/post-v3-pdf
-  properties:
-  - url: https://docs.mathpix.com/reference/post-v3-pdf
-    type: Documentation
-  - url: openapi/mathpix-document-ocr-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/mathpix-document-result-schema.json
-    type: JSONSchema
-  - url: examples/mathpix-process-document-example.json
-    type: Examples
-  description: >-
-    Asynchronous PDF and document OCR via v3/pdf. Submit by URL or multipart upload, poll status, optionally
-    stream via SSE, and download outputs in MMD, Markdown, DOCX, LaTeX (.tex.zip), HTML, PPTX, or per-line
-    JSON. Supports page ranges, alphabets, chemistry (SMILES), idiomatic equation arrays, and page-info
-    capture.
 - aid: mathpix:mathpix-strokes-api
   name: Mathpix Strokes API
   tags:
@@ -167,6 +144,21 @@ apis:
     url: examples/mathpix-batch-example.json
   - type: Documentation
     url: https://docs.mathpix.com/reference/ocr-usage
+- aid: mathpix:mathpix-documents-api
+  name: Mathpix Documents API
+  description: Submit, monitor, and retrieve document OCR jobs.
+  humanURL: https://docs.mathpix.com/reference/post-v3-pdf
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/mathpix-documents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.mathpix.com/reference/post-v3-pdf
+  - type: JSONSchema
+    url: json-schema/mathpix-document-result-schema.json
+  - type: Examples
+    url: examples/mathpix-process-document-example.json
 name: Mathpix
 tags:
   - OCR
