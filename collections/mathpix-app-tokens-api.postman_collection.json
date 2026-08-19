@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "466b18e4-7248-47d4-80a8-9074582a190c",
+      "id": "f253e961-3c23-4484-904f-c517fc4b31d7",
       "name": "App Tokens",
       "description": {
         "content": "Issue temporary client-side tokens.",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "9899dacf-ab31-46ea-b3ca-55ee56c1eb73",
+          "id": "c05888e3-95eb-45d3-80e5-5113d798a3c0",
           "name": "Create An App Token",
           "request": {
             "name": "Create An App Token",
@@ -58,7 +58,7 @@
           },
           "response": [
             {
-              "id": "0caf1f05-e0a1-48da-9b62-baa42d7de246",
+              "id": "79e833f0-508b-448c-8f48-02f1b3371a65",
               "name": "Token issued.",
               "originalRequest": {
                 "url": {
@@ -117,7 +117,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"app_token\": \"string\",\n  \"app_token_expires_at\": 1276,\n  \"strokes_session_id\": \"string\"\n}",
+              "body": "{\n  \"app_token\": \"string\",\n  \"app_token_expires_at\": 1523,\n  \"strokes_session_id\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -157,7 +157,7 @@
     ]
   },
   "info": {
-    "_postman_id": "ab060504-6890-4cf0-a11d-8143306d2333",
+    "_postman_id": "51f48e48-f3b0-4439-83c0-09e49d2a0241",
     "name": "Mathpix App Tokens API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {

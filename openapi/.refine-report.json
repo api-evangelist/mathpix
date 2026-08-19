@@ -4,6 +4,7 @@
     "mathpix-app-tokens-api-openapi.yml",
     "mathpix-batches-api-openapi.yml",
     "mathpix-conversions-api-openapi.yml",
+    "mathpix-documents-api-openapi.yml",
     "mathpix-images-api-openapi.yml",
     "mathpix-strokes-api-openapi.yml",
     "mathpix-usage-api-openapi.yml"
@@ -12,6 +13,7 @@
     "mathpix-app-tokens-api-openapi.yml",
     "mathpix-batches-api-openapi.yml",
     "mathpix-conversions-api-openapi.yml",
+    "mathpix-documents-api-openapi.yml",
     "mathpix-images-api-openapi.yml",
     "mathpix-strokes-api-openapi.yml",
     "mathpix-usage-api-openapi.yml"
@@ -19,8 +21,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": [
-    "mathpix-document-ocr-api-openapi.yml: parse error ScannerError: mapping values are not allowed here"
-  ]
+  "notes": [
+    "mathpix-app-tokens-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "mathpix-batches-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "mathpix-conversions-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "mathpix-documents-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "mathpix-images-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "mathpix-strokes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "mathpix-usage-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
 }

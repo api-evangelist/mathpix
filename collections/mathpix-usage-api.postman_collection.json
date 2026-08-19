@@ -1,31 +1,56 @@
 {
   "item": [
     {
-      "id": "1043cfa1-3797-45f3-9287-c09609c608a4",
-      "name": "Strokes",
+      "id": "ebbe9f54-1839-4ec8-a74c-3a4baae65165",
+      "name": "Usage",
       "description": {
-        "content": "Recognize handwritten math and text from stroke coordinates.",
+        "content": "Inspect OCR consumption.",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "f2809cf7-a0f5-4ea7-b808-741f360cc4a7",
-          "name": "Process Strokes",
+          "id": "5c9c0baf-df94-465a-ae28-e13a36e4441d",
+          "name": "Query OCR Usage",
           "request": {
-            "name": "Process Strokes",
+            "name": "Query OCR Usage",
             "description": {
-              "content": "Submit stroke coordinates representing handwriting and receive recognized MMD/LaTeX output.",
+              "content": "Aggregate OCR usage across a time window. Group by usage_type, request_args_hash, or app_id, and pick a timespan such as month, week, day, or hour.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "v3",
-                "strokes"
+                "ocr-usage"
               ],
               "host": [
                 "{{baseUrl}}"
               ],
-              "query": [],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from_date",
+                  "value": "<dateTime>",
+                  "description": "ISO datetime lower bound (inclusive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "to_date",
+                  "value": "<dateTime>",
+                  "description": "ISO datetime upper bound (exclusive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "group_by",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "timespan",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
               "variable": []
             },
             "header": [
@@ -42,40 +67,44 @@
                 "value": "<string>"
               },
               {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"strokes\": {\n    \"strokes\": {\n      \"x\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      \"y\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    }\n  },\n  \"strokes_session_id\": \"<string>\",\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": {\n    \"key_0\": \"string\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
+            "method": "GET",
+            "auth": null
           },
           "response": [
             {
-              "id": "e55f640b-d1a8-4a24-a4fc-b9e1fd44042c",
-              "name": "Recognition result.",
+              "id": "1c14f8a1-4ea6-46e3-b6b7-0249a8be935b",
+              "name": "Aggregated usage.",
               "originalRequest": {
                 "url": {
                   "path": [
                     "v3",
-                    "strokes"
+                    "ocr-usage"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timespan",
+                      "value": "<string>"
+                    }
+                  ],
                   "variable": []
                 },
                 "header": [
@@ -100,26 +129,12 @@
                     "value": "<string>"
                   },
                   {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  },
-                  {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"strokes\": {\n    \"strokes\": {\n      \"x\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      \"y\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    }\n  },\n  \"strokes_session_id\": \"<string>\",\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": {\n    \"key_0\": 7401,\n    \"key_1\": true\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "method": "GET",
+                "body": {}
               },
               "status": "OK",
               "code": 200,
@@ -129,7 +144,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"request_id\": \"string\",\n  \"text\": \"string\",\n  \"latex_styled\": \"string\",\n  \"confidence\": 1408.2009135987373,\n  \"confidence_rate\": 3567.8457285951304,\n  \"is_printed\": false,\n  \"is_handwritten\": false,\n  \"auto_rotate_confidence\": 1997.283938171709,\n  \"auto_rotate_degrees\": 90,\n  \"image_height\": 9107,\n  \"image_width\": 2472,\n  \"data\": [\n    {\n      \"key_0\": 234,\n      \"key_1\": \"string\"\n    },\n    {\n      \"key_0\": 1798,\n      \"key_1\": false,\n      \"key_2\": 8449,\n      \"key_3\": 5968\n    }\n  ],\n  \"html\": \"string\",\n  \"version\": \"string\"\n}",
+              "body": "{\n  \"ocr_usage\": [\n    {\n      \"from_date\": \"1960-09-25T02:14:53.030Z\",\n      \"app_id\": \"string\",\n      \"group_id\": \"string\",\n      \"usage_type\": \"string\",\n      \"request_args_hash\": \"string\",\n      \"count\": 3078\n    },\n    {\n      \"from_date\": \"2004-06-03T05:18:41.638Z\",\n      \"app_id\": \"string\",\n      \"group_id\": \"string\",\n      \"usage_type\": \"string\",\n      \"request_args_hash\": \"string\",\n      \"count\": 5319\n    }\n  ]\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -169,8 +184,8 @@
     ]
   },
   "info": {
-    "_postman_id": "ab6e1df6-85cb-429e-922d-7ec55542db28",
-    "name": "Mathpix App Tokens Strokes API",
+    "_postman_id": "d72a9028-df5b-49b5-8612-21bf71d823ac",
+    "name": "Mathpix App Tokens Usage API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.\n\n\nContact Support:\n Name: Mathpix Support\n Email: support@mathpix.com",

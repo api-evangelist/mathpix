@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Mathpix App Tokens Strokes API",
+    "name": "Mathpix App Tokens Images API",
     "version": "v3"
   },
   "request": {
@@ -15,18 +15,18 @@
   "items": [
     {
       "info": {
-        "name": "Strokes",
+        "name": "Images",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "Process Strokes",
+            "name": "Process An Image",
             "type": "http"
           },
           "http": {
             "method": "POST",
-            "url": "https://api.mathpix.com/v3/strokes",
+            "url": "https://api.mathpix.com/v3/text",
             "headers": [
               {
                 "name": "app_id",
@@ -46,7 +46,7 @@
               "data": "{}"
             }
           },
-          "docs": "Submit stroke coordinates representing handwriting and receive recognized MMD/LaTeX output."
+          "docs": "Submit a single image (by URL or base64) and receive Mathpix Markdown (MMD) plus optional structured data, HTML, styled LaTeX, line data, and word data. Auto-detects whether the content is printed or handwritten.\n"
         }
       ]
     }

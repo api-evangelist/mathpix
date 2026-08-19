@@ -1,0 +1,341 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mathpix Document OCR Documents API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "app_id",
+      "value": "{{app_id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process A Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mathpix.com/v3/pdf",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a document for asynchronous OCR. Accepts a public URL via JSON body or a multipart file upload. Returns a pdf_id used to poll status and download results.\n"
+        },
+        {
+          "info": {
+            "name": "Get Document Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mathpix.com/v3/pdf/:pdf_id",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pdf_id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier returned by POST /v3/pdf."
+              }
+            ]
+          },
+          "docs": "Check processing status for a previously submitted document."
+        },
+        {
+          "info": {
+            "name": "Delete Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mathpix.com/v3/pdf/:pdf_id",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pdf_id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier returned by POST /v3/pdf."
+              }
+            ]
+          },
+          "docs": "Permanently delete the submitted document and its derived outputs."
+        },
+        {
+          "info": {
+            "name": "Stream Document Results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mathpix.com/v3/pdf/:pdf_id/stream",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pdf_id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier returned by POST /v3/pdf."
+              }
+            ]
+          },
+          "docs": "Stream OCR results incrementally via server-sent events as pages complete."
+        },
+        {
+          "info": {
+            "name": "Download Mathpix Markdown",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mathpix.com/v3/pdf/:pdf_id.mmd",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pdf_id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier returned by POST /v3/pdf."
+              }
+            ]
+          },
+          "docs": "Download Mathpix Markdown"
+        },
+        {
+          "info": {
+            "name": "Download Standard Markdown",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mathpix.com/v3/pdf/:pdf_id.md",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pdf_id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier returned by POST /v3/pdf."
+              }
+            ]
+          },
+          "docs": "Download Standard Markdown"
+        },
+        {
+          "info": {
+            "name": "Download DOCX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mathpix.com/v3/pdf/:pdf_id.docx",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pdf_id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier returned by POST /v3/pdf."
+              }
+            ]
+          },
+          "docs": "Download DOCX"
+        },
+        {
+          "info": {
+            "name": "Download LaTeX Archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mathpix.com/v3/pdf/:pdf_id.tex.zip",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pdf_id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier returned by POST /v3/pdf."
+              }
+            ]
+          },
+          "docs": "Download LaTeX Archive"
+        },
+        {
+          "info": {
+            "name": "Download HTML",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mathpix.com/v3/pdf/:pdf_id.html",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pdf_id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier returned by POST /v3/pdf."
+              }
+            ]
+          },
+          "docs": "Download HTML"
+        },
+        {
+          "info": {
+            "name": "Download PPTX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mathpix.com/v3/pdf/:pdf_id.pptx",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pdf_id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier returned by POST /v3/pdf."
+              }
+            ]
+          },
+          "docs": "Download PPTX"
+        },
+        {
+          "info": {
+            "name": "Download Lines JSON",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mathpix.com/v3/pdf/:pdf_id.lines.json",
+            "headers": [
+              {
+                "name": "app_id",
+                "value": ""
+              },
+              {
+                "name": "app_key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pdf_id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier returned by POST /v3/pdf."
+              }
+            ]
+          },
+          "docs": "Download Lines JSON"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

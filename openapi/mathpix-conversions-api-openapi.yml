@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Mathpix App Tokens Conversions API
   description: 'Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.
@@ -69,6 +69,12 @@ paths:
                 $ref: '#/components/schemas/ConversionStatus'
 components:
   parameters:
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
     ContentTypeHeader:
       name: Content-Type
       in: header
@@ -76,12 +82,6 @@ components:
       schema:
         type: string
         default: application/json
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
     AppIdHeader:
       name: app_id
       in: header
@@ -89,6 +89,12 @@ components:
       schema:
         type: string
   schemas:
+    ConvertResponse:
+      type: object
+      properties:
+        conversion_id:
+          type: string
+          description: Identifier used to poll status and download outputs.
     ConvertRequest:
       type: object
       required:
@@ -127,12 +133,6 @@ components:
         metadata:
           type: object
           additionalProperties: true
-    ConvertResponse:
-      type: object
-      properties:
-        conversion_id:
-          type: string
-          description: Identifier used to poll status and download outputs.
     ConversionStatus:
       type: object
       properties:

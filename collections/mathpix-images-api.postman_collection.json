@@ -1,0 +1,312 @@
+{
+  "item": [
+    {
+      "id": "220382e0-1da8-47b3-9f9d-f7a2882f176a",
+      "name": "Images",
+      "description": {
+        "content": "Process a single image for STEM OCR.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d92f0a30-35d0-4435-bd89-05971ed9c222",
+          "name": "Process An Image",
+          "request": {
+            "name": "Process An Image",
+            "description": {
+              "content": "Submit a single image (by URL or base64) and receive Mathpix Markdown (MMD) plus optional structured data, HTML, styled LaTeX, line data, and word data. Auto-detects whether the content is printed or handwritten.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "text"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Mathpix application identifier issued at console.mathpix.com.",
+                "key": "app_id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Mathpix application secret issued at console.mathpix.com.",
+                "key": "app_key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"src\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 842,\n    \"key_1\": 4587.990834715529\n  },\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"math_inline_delimiters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"math_display_delimiters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include_line_data\": false,\n  \"include_word_data\": false,\n  \"rm_spaces\": true,\n  \"confidence_threshold\": \"<float>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd58de5c-fa82-4e16-ad85-f40360ed4184",
+              "name": "Successful OCR result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "app_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mathpix application identifier issued at console.mathpix.com.",
+                    "key": "app_id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mathpix application secret issued at console.mathpix.com.",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"src\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": false,\n    \"key_1\": true\n  },\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"math_inline_delimiters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"math_display_delimiters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include_line_data\": false,\n  \"include_word_data\": false,\n  \"rm_spaces\": true,\n  \"confidence_threshold\": \"<float>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"string\",\n  \"text\": \"string\",\n  \"latex_styled\": \"string\",\n  \"html\": \"string\",\n  \"data\": [\n    {\n      \"key_0\": true\n    },\n    {\n      \"key_0\": 5217,\n      \"key_1\": 4414.720543296073\n    }\n  ],\n  \"confidence\": 2419.317860170721,\n  \"confidence_rate\": 8029.273751785664,\n  \"is_printed\": true,\n  \"is_handwritten\": false,\n  \"auto_rotate_confidence\": 7638.709380098842,\n  \"auto_rotate_degrees\": 180,\n  \"image_height\": 8374,\n  \"image_width\": 4731,\n  \"line_data\": [\n    {\n      \"key_0\": \"string\"\n    },\n    {\n      \"key_0\": 6425.85384579472,\n      \"key_1\": false\n    }\n  ],\n  \"word_data\": [\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    {\n      \"key_0\": \"string\"\n    }\n  ],\n  \"version\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ed92656-63ba-4bd8-87b7-d1f079ce972f",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "app_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mathpix application identifier issued at console.mathpix.com.",
+                    "key": "app_id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mathpix application secret issued at console.mathpix.com.",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"src\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": false,\n    \"key_1\": true\n  },\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"math_inline_delimiters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"math_display_delimiters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include_line_data\": false,\n  \"include_word_data\": false,\n  \"rm_spaces\": true,\n  \"confidence_threshold\": \"<float>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "963595f8-b38c-4fc6-875b-e69e21c3e1a5",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "app_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mathpix application identifier issued at console.mathpix.com.",
+                    "key": "app_id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mathpix application secret issued at console.mathpix.com.",
+                    "key": "app_key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"src\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": false,\n    \"key_1\": true\n  },\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"math_inline_delimiters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"math_display_delimiters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include_line_data\": false,\n  \"include_word_data\": false,\n  \"rm_spaces\": true,\n  \"confidence_threshold\": \"<float>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mathpix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "app_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "781d53e1-19d9-40a1-8d72-f5f6b5753ab4",
+    "name": "Mathpix App Tokens Images API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.\n\n\nContact Support:\n Name: Mathpix Support\n Email: support@mathpix.com",
+      "type": "text/plain"
+    }
+  }
+}
