@@ -1,5 +1,6 @@
 aid: mathpix
 url: https://raw.githubusercontent.com/api-evangelist/mathpix/refs/heads/main/apis.yml
+specificationVersion: '0.23'
 apis:
 - aid: mathpix:mathpix-strokes-api
   name: Mathpix Strokes API
