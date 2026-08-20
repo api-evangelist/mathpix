@@ -96,6 +96,8 @@ apis:
   description: Process a single image for STEM OCR.
   humanURL: https://docs.mathpix.com/reference/post-v3-text
   tags:
+  - Image
+  tags_raw:
   - Images
   properties:
   - type: OpenAPI
@@ -162,6 +164,17 @@ apis:
     url: examples/mathpix-process-document-example.json
 name: Mathpix
 tags:
+  - OCR
+  - STEM
+  - Math
+  - Chemistry
+  - Document Conversion
+  - PDF
+  - LaTeX
+  - Handwriting
+  - Artificial Intelligence
+  - Machine-Learning
+tags_raw:
   - OCR
   - STEM
   - Math
