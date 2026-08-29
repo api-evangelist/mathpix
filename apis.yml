@@ -273,7 +273,7 @@ common:
   - type: CLI
     url: https://github.com/Mathpix/mpx-cli
     name: Mathpix CLI (mpx)
-  - type: Samples
+  - type: Examples
     url: https://github.com/Mathpix/api-examples
     name: API Examples
   - type: Tools
