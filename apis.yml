@@ -215,6 +215,8 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/mathpix.png
 access: 3rd-Party
 common:
+  - type: Website
+    url: https://www.mathpix.com/
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/mathpix/overview
   - type: AgenticAccess
