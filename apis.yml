@@ -79,6 +79,8 @@ apis:
   description: Convert Mathpix Markdown into export formats.
   humanURL: https://docs.mathpix.com/reference/post-v3-text
   tags:
+  - Conversion
+  tags_raw:
   - Conversions
   properties:
   - type: OpenAPI
