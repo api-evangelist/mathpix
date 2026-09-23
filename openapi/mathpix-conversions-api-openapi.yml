@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Mathpix App Tokens Conversions API
-  description: 'Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.
-
-    '
+  title: Mathpix Convert Conversions API
+  description: Transform Mathpix Markdown (MMD) into DOCX, LaTeX (.tex.zip), HTML, PDF, PPTX, plain Markdown, and archived multi-file outputs. Submission is synchronous; status and downloads use the returned conversion_id.
   version: v3
   contact:
     name: Mathpix Support
@@ -16,7 +14,8 @@ servers:
 - url: https://api.mathpix.com
   description: Production Server
 security:
-- AppKeyAuth: []
+- AppIdAuth: []
+  AppKeyAuth: []
 tags:
 - name: Conversions
   description: Convert Mathpix Markdown into export formats.
@@ -69,12 +68,6 @@ paths:
                 $ref: '#/components/schemas/ConversionStatus'
 components:
   parameters:
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
     ContentTypeHeader:
       name: Content-Type
       in: header
@@ -82,6 +75,12 @@ components:
       schema:
         type: string
         default: application/json
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
     AppIdHeader:
       name: app_id
       in: header
@@ -89,12 +88,6 @@ components:
       schema:
         type: string
   schemas:
-    ConvertResponse:
-      type: object
-      properties:
-        conversion_id:
-          type: string
-          description: Identifier used to poll status and download outputs.
     ConvertRequest:
       type: object
       required:
@@ -148,7 +141,17 @@ components:
           additionalProperties:
             type: object
             additionalProperties: true
+    ConvertResponse:
+      type: object
+      properties:
+        conversion_id:
+          type: string
+          description: Identifier used to poll status and download outputs.
   securitySchemes:
+    AppIdAuth:
+      type: apiKey
+      in: header
+      name: app_id
     AppKeyAuth:
       type: apiKey
       in: header

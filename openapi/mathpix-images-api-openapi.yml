@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Mathpix App Tokens Images API
-  description: 'Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.
-
-    '
+  title: Mathpix Image OCR Images API
+  description: Mathpix v3/text endpoint for STEM image OCR. Recognizes printed and handwritten math, text, tables, and chemistry diagrams from a single image and returns Mathpix Markdown (MMD) plus optional structured data, HTML, line- and word-level segmentation, and styled LaTeX.
   version: v3
   contact:
     name: Mathpix Support
@@ -16,7 +14,8 @@ servers:
 - url: https://api.mathpix.com
   description: Production Server
 security:
-- AppKeyAuth: []
+- AppIdAuth: []
+  AppKeyAuth: []
 tags:
 - name: Images
   description: Process a single image for STEM OCR.
@@ -24,9 +23,7 @@ paths:
   /v3/text:
     post:
       summary: Process An Image
-      description: 'Submit a single image (by URL or base64) and receive Mathpix Markdown (MMD) plus optional structured data, HTML, styled LaTeX, line data, and word data. Auto-detects whether the content is printed or handwritten.
-
-        '
+      description: Submit a single image (by URL or base64) and receive Mathpix Markdown (MMD) plus optional structured data, HTML, styled LaTeX, line data, and word data. Auto-detects whether the content is printed or handwritten.
       operationId: processImage
       tags:
       - Images
@@ -53,13 +50,6 @@ paths:
           description: Rate limit exceeded.
 components:
   parameters:
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
-      description: Mathpix application secret issued at console.mathpix.com.
     ContentTypeHeader:
       name: Content-Type
       in: header
@@ -67,6 +57,13 @@ components:
       schema:
         type: string
         default: application/json
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Mathpix application secret issued at console.mathpix.com.
     AppIdHeader:
       name: app_id
       in: header
@@ -192,6 +189,10 @@ components:
           type: string
           description: Error message if processing failed.
   securitySchemes:
+    AppIdAuth:
+      type: apiKey
+      in: header
+      name: app_id
     AppKeyAuth:
       type: apiKey
       in: header

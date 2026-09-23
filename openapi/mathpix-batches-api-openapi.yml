@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Mathpix App Tokens Batches API
-  description: 'Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.
-
-    '
+  title: Mathpix Batch Batches API
+  description: Submit many images for OCR in a single request. Each batch returns a batch_id that can be polled to retrieve per-image results.
   version: v3
   contact:
     name: Mathpix Support
@@ -16,7 +14,8 @@ servers:
 - url: https://api.mathpix.com
   description: Production Server
 security:
-- AppKeyAuth: []
+- AppIdAuth: []
+  AppKeyAuth: []
 tags:
 - name: Batches
   description: Process multiple images in one request.
@@ -68,32 +67,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/BatchResultsResponse'
 components:
-  parameters:
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
-    ContentTypeHeader:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-    AppIdHeader:
-      name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
   schemas:
-    BatchSubmitResponse:
-      type: object
-      properties:
-        batch_id:
-          type: integer
     BatchResultsResponse:
       type: object
       properties:
@@ -105,6 +79,11 @@ components:
           type: object
           description: Map of submitted key -> per-image OCR result object.
           additionalProperties: true
+    BatchSubmitResponse:
+      type: object
+      properties:
+        batch_id:
+          type: integer
     BatchRequest:
       type: object
       required:
@@ -143,7 +122,31 @@ components:
         metadata:
           type: object
           additionalProperties: true
+  parameters:
+    ContentTypeHeader:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
   securitySchemes:
+    AppIdAuth:
+      type: apiKey
+      in: header
+      name: app_id
     AppKeyAuth:
       type: apiKey
       in: header

@@ -1,35 +1,43 @@
 {
   "provider": "mathpix",
   "sources": [
+    "_original/mathpix-batch-api-openapi.yml",
+    "_original/mathpix-convert-api-openapi.yml",
+    "_original/mathpix-document-ocr-api-openapi.yml",
+    "_original/mathpix-image-ocr-api-openapi.yml",
+    "_original/mathpix-ocr-usage-api-openapi.yml",
     "mathpix-app-tokens-api-openapi.yml",
-    "mathpix-batches-api-openapi.yml",
-    "mathpix-conversions-api-openapi.yml",
-    "mathpix-documents-api-openapi.yml",
-    "mathpix-images-api-openapi.yml",
-    "mathpix-strokes-api-openapi.yml",
-    "mathpix-usage-api-openapi.yml"
+    "mathpix-strokes-api-openapi.yml"
   ],
   "outputs": [
-    "mathpix-app-tokens-api-openapi.yml",
     "mathpix-batches-api-openapi.yml",
     "mathpix-conversions-api-openapi.yml",
     "mathpix-documents-api-openapi.yml",
     "mathpix-images-api-openapi.yml",
-    "mathpix-strokes-api-openapi.yml",
-    "mathpix-usage-api-openapi.yml"
+    "mathpix-usage-api-openapi.yml",
+    "mathpix-app-tokens-api-openapi.yml",
+    "mathpix-strokes-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "mathpix-app-tokens-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /v3/app-tokens post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "mathpix-strokes-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /v3/strokes post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
   "notes": [
-    "mathpix-app-tokens-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "mathpix-batches-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "mathpix-conversions-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "mathpix-documents-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "mathpix-images-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "mathpix-strokes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "mathpix-usage-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (5 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "mathpix-batch-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "mathpix-convert-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "mathpix-document-ocr-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "mathpix-image-ocr-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "mathpix-ocr-usage-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "mathpix-batches-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mathpix-conversions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mathpix-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mathpix-images-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mathpix-usage-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

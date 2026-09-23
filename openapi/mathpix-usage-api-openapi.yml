@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Mathpix App Tokens Usage API
-  description: 'Mint short-lived client-side tokens so browsers, mobile apps, and digital-ink surfaces can call Mathpix without exposing your long-lived app_key. Tokens default to 5 minutes and can be issued from 30 seconds to 12 hours. Token issuance is free.
-
-    '
+  title: Mathpix OCR Usage API
+  description: Query OCR consumption metrics aggregated by usage type, request signature, or application, over arbitrary timespans. Used to track consumption trends and reconcile billing.
   version: v3
   contact:
     name: Mathpix Support
@@ -16,7 +14,8 @@ servers:
 - url: https://api.mathpix.com
   description: Production Server
 security:
-- AppKeyAuth: []
+- AppIdAuth: []
+  AppKeyAuth: []
 tags:
 - name: Usage
   description: Inspect OCR consumption.
@@ -72,20 +71,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/OcrUsageResponse'
 components:
-  parameters:
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
-    AppIdHeader:
-      name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
   schemas:
+    OcrUsageResponse:
+      type: object
+      properties:
+        ocr_usage:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageRecord'
     UsageRecord:
       type: object
       properties:
@@ -103,14 +96,24 @@ components:
           type: string
         count:
           type: integer
-    OcrUsageResponse:
-      type: object
-      properties:
-        ocr_usage:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsageRecord'
+  parameters:
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
   securitySchemes:
+    AppIdAuth:
+      type: apiKey
+      in: header
+      name: app_id
     AppKeyAuth:
       type: apiKey
       in: header
