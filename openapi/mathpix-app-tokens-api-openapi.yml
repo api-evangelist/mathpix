@@ -54,18 +54,6 @@ paths:
                 $ref: '#/components/schemas/AppTokenResponse'
 components:
   schemas:
-    AppTokenRequest:
-      type: object
-      properties:
-        expires:
-          type: integer
-          description: Token lifetime in seconds. Minimum 30, maximum 43200 (12 hours). Default 300.
-          minimum: 30
-          maximum: 43200
-          default: 300
-        include_strokes_session_id:
-          type: boolean
-          description: When true, the response includes a strokes_session_id for digital-ink capture sessions.
     AppTokenResponse:
       type: object
       properties:
@@ -78,6 +66,18 @@ components:
         strokes_session_id:
           type: string
           description: Optional session identifier for digital-ink workflows.
+    AppTokenRequest:
+      type: object
+      properties:
+        expires:
+          type: integer
+          description: Token lifetime in seconds. Minimum 30, maximum 43200 (12 hours). Default 300.
+          minimum: 30
+          maximum: 43200
+          default: 300
+        include_strokes_session_id:
+          type: boolean
+          description: When true, the response includes a strokes_session_id for digital-ink capture sessions.
   securitySchemes:
     AppKeyAuth:
       type: apiKey

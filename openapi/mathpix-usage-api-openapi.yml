@@ -72,13 +72,6 @@ paths:
                 $ref: '#/components/schemas/OcrUsageResponse'
 components:
   schemas:
-    OcrUsageResponse:
-      type: object
-      properties:
-        ocr_usage:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsageRecord'
     UsageRecord:
       type: object
       properties:
@@ -96,15 +89,22 @@ components:
           type: string
         count:
           type: integer
+    OcrUsageResponse:
+      type: object
+      properties:
+        ocr_usage:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageRecord'
   parameters:
-    AppKeyHeader:
-      name: app_key
+    AppIdHeader:
+      name: app_id
       in: header
       required: true
       schema:
         type: string
-    AppIdHeader:
-      name: app_id
+    AppKeyHeader:
+      name: app_key
       in: header
       required: true
       schema:

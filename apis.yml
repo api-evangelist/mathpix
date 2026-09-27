@@ -185,7 +185,7 @@ tags:
 - LaTeX
 - Handwriting
 - Artificial Intelligence
-- Machine-Learning
+- Machine Learning
 tags_raw:
 - OCR
 - STEM
@@ -197,6 +197,7 @@ tags_raw:
 - Handwriting
 - AI
 - Machine Learning
+- Machine-Learning
 kind: contract
 accessModel:
   pricing: freemium

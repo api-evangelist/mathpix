@@ -44,6 +44,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/StrokesResponse'
 components:
+  parameters:
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
+    ContentTypeHeader:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
   schemas:
     StrokesRequest:
       type: object
@@ -132,26 +152,6 @@ components:
           type: string
         version:
           type: string
-  parameters:
-    ContentTypeHeader:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
-    AppIdHeader:
-      name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
   securitySchemes:
     AppKeyAuth:
       type: apiKey
