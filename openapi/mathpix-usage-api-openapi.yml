@@ -71,6 +71,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/OcrUsageResponse'
 components:
+  parameters:
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
   schemas:
     UsageRecord:
       type: object
@@ -96,19 +109,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UsageRecord'
-  parameters:
-    AppIdHeader:
-      name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
   securitySchemes:
     AppIdAuth:
       type: apiKey

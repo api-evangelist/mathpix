@@ -106,6 +106,12 @@ components:
         metadata:
           type: object
           additionalProperties: true
+    ConvertResponse:
+      type: object
+      properties:
+        conversion_id:
+          type: string
+          description: Identifier used to poll status and download outputs.
     ConversionStatus:
       type: object
       properties:
@@ -121,19 +127,7 @@ components:
           additionalProperties:
             type: object
             additionalProperties: true
-    ConvertResponse:
-      type: object
-      properties:
-        conversion_id:
-          type: string
-          description: Identifier used to poll status and download outputs.
   parameters:
-    AppIdHeader:
-      name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
     ContentTypeHeader:
       name: Content-Type
       in: header
@@ -141,6 +135,12 @@ components:
       schema:
         type: string
         default: application/json
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
     AppKeyHeader:
       name: app_key
       in: header

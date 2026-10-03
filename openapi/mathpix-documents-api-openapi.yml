@@ -229,7 +229,58 @@ paths:
                 type: object
                 additionalProperties: true
 components:
+  parameters:
+    PdfIdPath:
+      name: pdf_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Job identifier returned by POST /v3/pdf.
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
   schemas:
+    PdfStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - received
+          - loaded
+          - split
+          - completed
+          - processing
+          - error
+        num_pages:
+          type: integer
+        percent_done:
+          type: number
+          format: float
+        error:
+          type: string
+        conversion_status:
+          type: object
+          description: 'Per-format conversion progress map (e.g. {"docx": {"status": "completed"}}).'
+          additionalProperties:
+            type: object
+            additionalProperties: true
+    PdfSubmitResponse:
+      type: object
+      properties:
+        pdf_id:
+          type: string
+          description: Identifier used to poll status and download outputs.
     PdfRequest:
       type: object
       properties:
@@ -280,57 +331,6 @@ components:
         conversion_options:
           type: object
           additionalProperties: true
-    PdfSubmitResponse:
-      type: object
-      properties:
-        pdf_id:
-          type: string
-          description: Identifier used to poll status and download outputs.
-    PdfStatus:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - received
-          - loaded
-          - split
-          - completed
-          - processing
-          - error
-        num_pages:
-          type: integer
-        percent_done:
-          type: number
-          format: float
-        error:
-          type: string
-        conversion_status:
-          type: object
-          description: 'Per-format conversion progress map (e.g. {"docx": {"status": "completed"}}).'
-          additionalProperties:
-            type: object
-            additionalProperties: true
-  parameters:
-    PdfIdPath:
-      name: pdf_id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Job identifier returned by POST /v3/pdf.
-    AppIdHeader:
-      name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
   securitySchemes:
     AppIdAuth:
       type: apiKey
