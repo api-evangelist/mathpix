@@ -230,6 +230,12 @@ paths:
                 additionalProperties: true
 components:
   parameters:
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
     PdfIdPath:
       name: pdf_id
       in: path
@@ -239,12 +245,6 @@ components:
       description: Job identifier returned by POST /v3/pdf.
     AppIdHeader:
       name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
-    AppKeyHeader:
-      name: app_key
       in: header
       required: true
       schema:

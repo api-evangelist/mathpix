@@ -72,14 +72,14 @@ paths:
                 $ref: '#/components/schemas/OcrUsageResponse'
 components:
   parameters:
-    AppKeyHeader:
-      name: app_key
+    AppIdHeader:
+      name: app_id
       in: header
       required: true
       schema:
         type: string
-    AppIdHeader:
-      name: app_id
+    AppKeyHeader:
+      name: app_key
       in: header
       required: true
       schema:

@@ -67,43 +67,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/BatchResultsResponse'
 components:
-  parameters:
-    ContentTypeHeader:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-    AppIdHeader:
-      name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
   schemas:
-    BatchSubmitResponse:
-      type: object
-      properties:
-        batch_id:
-          type: integer
-    BatchResultsResponse:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            type: string
-        results:
-          type: object
-          description: Map of submitted key -> per-image OCR result object.
-          additionalProperties: true
     BatchRequest:
       type: object
       required:
@@ -142,6 +106,42 @@ components:
         metadata:
           type: object
           additionalProperties: true
+    BatchResultsResponse:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            type: string
+        results:
+          type: object
+          description: Map of submitted key -> per-image OCR result object.
+          additionalProperties: true
+    BatchSubmitResponse:
+      type: object
+      properties:
+        batch_id:
+          type: integer
+  parameters:
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    ContentTypeHeader:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
   securitySchemes:
     AppIdAuth:
       type: apiKey

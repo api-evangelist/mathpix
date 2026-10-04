@@ -45,6 +45,12 @@ paths:
                 $ref: '#/components/schemas/StrokesResponse'
 components:
   parameters:
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
     ContentTypeHeader:
       name: Content-Type
       in: header
@@ -58,55 +64,7 @@ components:
       required: true
       schema:
         type: string
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
   schemas:
-    StrokesResponse:
-      type: object
-      properties:
-        request_id:
-          type: string
-        text:
-          type: string
-        latex_styled:
-          type: string
-        confidence:
-          type: number
-          format: float
-        confidence_rate:
-          type: number
-          format: float
-        is_printed:
-          type: boolean
-        is_handwritten:
-          type: boolean
-        auto_rotate_confidence:
-          type: number
-          format: float
-        auto_rotate_degrees:
-          type: integer
-          enum:
-          - 0
-          - 90
-          - -90
-          - 180
-        image_height:
-          type: integer
-        image_width:
-          type: integer
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        html:
-          type: string
-        version:
-          type: string
     StrokesRequest:
       type: object
       required:
@@ -152,6 +110,48 @@ components:
         metadata:
           type: object
           additionalProperties: true
+    StrokesResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+        text:
+          type: string
+        latex_styled:
+          type: string
+        confidence:
+          type: number
+          format: float
+        confidence_rate:
+          type: number
+          format: float
+        is_printed:
+          type: boolean
+        is_handwritten:
+          type: boolean
+        auto_rotate_confidence:
+          type: number
+          format: float
+        auto_rotate_degrees:
+          type: integer
+          enum:
+          - 0
+          - 90
+          - -90
+          - 180
+        image_height:
+          type: integer
+        image_width:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        html:
+          type: string
+        version:
+          type: string
   securitySchemes:
     AppKeyAuth:
       type: apiKey
