@@ -1,121 +1,94 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Mathpix
-providerId: mathpix
-created: '2026-05-25'
-modified: '2026-05-25'
-reconciled: true
-tags:
-  - OCR
-  - STEM
-  - Document Conversion
-  - Pay As You Go
-description: 'Plans and pricing surface for Mathpix Snip and the Convert API. Source: mathpix.com/pricing.
-  SCS (Secure Conversion Service) and on-premises pricing are custom and require sales contact.'
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://mathpix.com/pricing/all
 sources:
-  - https://mathpix.com/pricing
-  - https://mathpix.com/pricing/all
-  - https://docs.mathpix.com/guides/authentication
+- https://mathpix.com/pricing/all
+- https://mathpix.com/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: unclear
+pricing_basis: tiered-subscription
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-10-07'
+  evidence: Private Cloud OCR The Mathpix API as a container in your own cloud or data center.
+  managed_tier: Pro
+published: true
+note: Overview pricing page covering Snip, OCR API, Private Cloud OCR, and Secure Conversion; detail linked
+  elsewhere.
+plan_count: 5
+currency: USD
 plans:
-  - id: mathpix-snip-free
-    name: Snip Free
-    type: free
-    description: Free Snip tier for individuals — desktop snipping tool, mobile, and limited document conversions.
-    entries:
-      - label: User
-        name: user
-        type: included
-        metric: user
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-
-  - id: mathpix-snip-pro
-    name: Snip Pro
-    type: subscription
-    description: Snip Pro subscription for individuals — higher limits, collaborative MMD editor, Chrome extension.
-    entries:
-      - label: User
-        name: user
-        type: subscription
-        metric: user
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '4.99'
-        userMultiplied: true
-
-  - id: mathpix-convert-api
-    name: Convert API
-    type: usage-based
-    description: Pay-as-you-go Convert API covering v3/text (image OCR), v3/pdf (document OCR), v3/converter
-      (MMD conversion), v3/batch, and v3/strokes. Billed per processed image or page; volume discounts available.
-    entries:
-      - label: Image OCR
-        name: image_ocr
-        type: metered
-        metric: image
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.002'
-        priceFloor: '0.002'
-        userMultiplied: false
-        description: From $0.002 per image at headline rate; volume tiers available.
-      - label: Document OCR
-        name: document_ocr
-        type: metered
-        metric: page
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: 'contact'
-        userMultiplied: false
-        description: Per-page document OCR pricing; consult sales for committed-volume rates.
-      - label: Conversion
-        name: conversion
-        type: metered
-        metric: conversion
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: 'contact'
-        userMultiplied: false
-        description: MMD-to-format conversion (DOCX, LaTeX, HTML, PDF, PPTX) priced per conversion.
-      - label: App Token Issuance
-        name: app_token
-        type: included
-        metric: token
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-        description: Token issuance via /v3/app-tokens is free.
-
-  - id: mathpix-scs
-    name: Secure Conversion Service (SCS)
-    type: enterprise
-    description: Dedicated infrastructure for high-volume STEM OCR and conversion with custom SLAs.
-      On-premises deployment option available via mathpix-on-prem.
-    entries:
-      - label: Contract
-        name: contract
-        type: custom
-        metric: contract
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: 'contact'
-        userMultiplied: false
-        description: Custom pricing — contact sales.
+- name: Snip Free
+  price_text: Free
+  period: none
+- name: Snip Pro
+  price_text: from $4.99/mo
+  price: 4.99
+  currency: USD
+  period: month
+- name: OCR API (Pay as you go)
+  price_text: From $0.002/image
+  price: 0.002
+  currency: USD
+  period: per-use
+  unit: image
+- name: Private Cloud OCR
+  price_text: $25,000/yr
+  price: 25000
+  currency: USD
+  period: year
+  included_quota: 25M pages included
+- name: Secure Conversion
+  price_text: Custom
+  period: none
+  included_quota: Dedicated infrastructure
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - subscription
+  units:
+  - object
+  plans:
+  - name: Snip Free
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Snip Pro
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: OCR API (Pay as you go)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - object
+    periods:
+    - other
+  - name: Private Cloud OCR
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - year
+  - name: Secure Conversion
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
