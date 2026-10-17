@@ -67,27 +67,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConversionStatus'
 components:
-  parameters:
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
-    ContentTypeHeader:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-    AppIdHeader:
-      name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
   schemas:
+    ConversionStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - processing
+          - completed
+          - error
+        conversion_status:
+          type: object
+          description: Per-format conversion progress map.
+          additionalProperties:
+            type: object
+            additionalProperties: true
     ConvertRequest:
       type: object
       required:
@@ -132,21 +127,26 @@ components:
         conversion_id:
           type: string
           description: Identifier used to poll status and download outputs.
-    ConversionStatus:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - processing
-          - completed
-          - error
-        conversion_status:
-          type: object
-          description: Per-format conversion progress map.
-          additionalProperties:
-            type: object
-            additionalProperties: true
+  parameters:
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    ContentTypeHeader:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
   securitySchemes:
     AppIdAuth:
       type: apiKey

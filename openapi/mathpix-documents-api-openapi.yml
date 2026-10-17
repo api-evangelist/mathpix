@@ -229,26 +229,6 @@ paths:
                 type: object
                 additionalProperties: true
 components:
-  parameters:
-    AppKeyHeader:
-      name: app_key
-      in: header
-      required: true
-      schema:
-        type: string
-    PdfIdPath:
-      name: pdf_id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Job identifier returned by POST /v3/pdf.
-    AppIdHeader:
-      name: app_id
-      in: header
-      required: true
-      schema:
-        type: string
   schemas:
     PdfStatus:
       type: object
@@ -275,12 +255,6 @@ components:
           additionalProperties:
             type: object
             additionalProperties: true
-    PdfSubmitResponse:
-      type: object
-      properties:
-        pdf_id:
-          type: string
-          description: Identifier used to poll status and download outputs.
     PdfRequest:
       type: object
       properties:
@@ -331,6 +305,32 @@ components:
         conversion_options:
           type: object
           additionalProperties: true
+    PdfSubmitResponse:
+      type: object
+      properties:
+        pdf_id:
+          type: string
+          description: Identifier used to poll status and download outputs.
+  parameters:
+    AppIdHeader:
+      name: app_id
+      in: header
+      required: true
+      schema:
+        type: string
+    AppKeyHeader:
+      name: app_key
+      in: header
+      required: true
+      schema:
+        type: string
+    PdfIdPath:
+      name: pdf_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Job identifier returned by POST /v3/pdf.
   securitySchemes:
     AppIdAuth:
       type: apiKey
