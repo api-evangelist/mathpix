@@ -1,4 +1,4 @@
-# Mathpix (mathpix)
+# Mathpix
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,214 +64,179 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/mathpix/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/mathpix/refs/heads/main/apis.yml)
+Mathpix provides OCR and document conversion for STEM content. Its API converts images, handwriting, strokes and PDFs into LaTeX, Markdown and structured formats, with batch processing, app tokens and usage reporting.
 
-## Scope
+**Areas:** OCR · STEM · Math · Chemistry · Document Conversion · PDF · LaTeX · Handwriting · Artificial Intelligence · Machine Learning
 
-- **Access:** 3rd-Party
+## Mathpix on APIs.io
 
-## Tags
+Everything profiled for Mathpix is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/mathpix/](https://apis.io/providers/mathpix/)** — or go straight to one of the APIs or properties below.
 
-- OCR
-- STEM
-- Math
-- Chemistry
-- Document Conversion
-- PDF
-- LaTeX
-- Handwriting
-- AI
-- Machine Learning
+### APIs (7)
 
-## Timestamps
+- [Mathpix Strokes API](https://apis.io/apis/mathpix/mathpix-strokes-api/) — Recognize handwritten math, text, and chemistry from raw stroke coordinates (x/y arrays) via v3/strokes. Pairs with the App Tokens API and…
+- [Mathpix App Tokens API](https://apis.io/apis/mathpix/mathpix-app-tokens-api/) — Mint short-lived client-side app_token credentials (30 seconds to 12 hours; 5 minutes by default) so browsers, mobile clients, and digital-ink surfaces can…
+- [Mathpix Batches API](https://apis.io/apis/mathpix/mathpix-batches-api/) — Process multiple images in one request.
+- [Mathpix Conversions API](https://apis.io/apis/mathpix/mathpix-conversions-api/) — Convert Mathpix Markdown into export formats.
+- [Mathpix Images API](https://apis.io/apis/mathpix/mathpix-images-api/) — Process a single image for STEM OCR.
+- [Mathpix Usage API](https://apis.io/apis/mathpix/mathpix-usage-api/) — Inspect OCR consumption.
+- [Mathpix Documents API](https://apis.io/apis/mathpix/mathpix-documents-api/) — Submit, monitor, and retrieve document OCR jobs.
 
-- **Created:** 2026-05-25
-- **Modified:** 2026-05-25
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Mathpix Image OCR API
+#### Agentic access (1)
 
-Submit a single image (by URL or base64) to v3/text and receive Mathpix Markdown plus optional structured data, HTML, styled LaTeX, and line- or word-level segmentation. Auto-detects printed vs. handwritten content and handles math, text, tables, and chemistry diagrams.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://docs.mathpix.com/reference/post-v3-text](https://docs.mathpix.com/reference/post-v3-text)
+- [Mathpix Agentic Access](https://apis.io/agentic-access/mathpix/mathpix-agentic-access/)
 
-#### Tags
+#### JSON Schema (2)
 
-- OCR
-- STEM
-- Math
-- Images
+The data models the API reads and writes.
 
-#### Properties
+- [Mathpix Document OCR Job](https://apis.io/schemas/mathpix/mathpix-document-result/)
+- [Mathpix Image OCR Result](https://apis.io/schemas/mathpix/mathpix-image-result/)
 
-- [Documentation](https://docs.mathpix.com/reference/post-v3-text)
-- [OpenAPI](openapi/mathpix-image-ocr-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mathpix-image-ocr-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mathpix-image-ocr-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/mathpix-image-result-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/mathpix-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Example](examples/mathpix-process-image-example.json)
+#### JSON-LD (1)
 
-### Mathpix Document OCR API
+Linked-data contexts for the provider's vocabulary.
 
-Asynchronous PDF and document OCR via v3/pdf. Submit by URL or multipart upload, poll status, optionally stream via SSE, and download outputs in MMD, Markdown, DOCX, LaTeX (.tex.zip), HTML, PPTX, or per-line JSON. Supports page ranges, alphabets, chemistry (SMILES), idiomatic equation arrays, and page-info capture.
+- [Mathpix Context](https://apis.io/jsonld/mathpix/mathpix-context/)
 
-- **Human URL:** [https://docs.mathpix.com/reference/post-v3-pdf](https://docs.mathpix.com/reference/post-v3-pdf)
+#### Vocabulary (1)
 
-#### Tags
+The provider's domain terms, defined.
 
-- OCR
-- PDF
-- Documents
-- STEM
-- Conversion
+- [Mathpix Vocabulary](https://apis.io/vocabularies/mathpix/mathpix-vocabulary/)
 
-#### Properties
+#### Examples (5)
 
-- [Documentation](https://docs.mathpix.com/reference/post-v3-pdf)
-- [OpenAPI](openapi/mathpix-document-ocr-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON Schema](json-schema/mathpix-document-result-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Example](examples/mathpix-process-document-example.json)
+Example requests and responses.
 
-### Mathpix Convert API
+- [Mathpix Batch Example](https://apis.io/examples/mathpix/mathpix-batch-example/)
+- [Mathpix Convert Markdown Example](https://apis.io/examples/mathpix/mathpix-convert-markdown-example/)
+- [Mathpix Process Document Example](https://apis.io/examples/mathpix/mathpix-process-document-example/)
+- [Mathpix Process Image Example](https://apis.io/examples/mathpix/mathpix-process-image-example/)
+- [Mathpix Strokes Example](https://apis.io/examples/mathpix/mathpix-strokes-example/)
 
-Transform Mathpix Markdown into DOCX, LaTeX archives, HTML, PDF, PPTX, plain Markdown, and zipped multi-file outputs. Synchronous submission returns a conversion_id used to poll per-format completion and download artifacts.
+#### Collections (17)
 
-- **Human URL:** [https://docs.mathpix.com/reference/post-v3-converter](https://docs.mathpix.com/reference/post-v3-converter)
+Postman and Open Collection request collections.
 
-#### Tags
+- [Mathpix App Tokens API](https://apis.io/collections/mathpix/open-mathpix-app-tokens-api/)
+- [Mathpix Batch API](https://apis.io/collections/mathpix/open-mathpix-batch-api/)
+- [Mathpix App Tokens Batches API](https://apis.io/collections/mathpix/open-mathpix-batches-api/)
+- [Mathpix App Tokens Conversions API](https://apis.io/collections/mathpix/open-mathpix-conversions-api/)
+- [Mathpix Convert API](https://apis.io/collections/mathpix/open-mathpix-convert-api/)
+- [Mathpix Document OCR Documents API](https://apis.io/collections/mathpix/open-mathpix-documents-api/)
+- [Mathpix Image OCR API](https://apis.io/collections/mathpix/open-mathpix-image-ocr-api/)
+- [Mathpix App Tokens Images API](https://apis.io/collections/mathpix/open-mathpix-images-api/)
+- [Mathpix OCR Usage API](https://apis.io/collections/mathpix/open-mathpix-ocr-usage-api/)
+- [Mathpix App Tokens Strokes API](https://apis.io/collections/mathpix/open-mathpix-strokes-api/)
+- [Mathpix App Tokens Usage API](https://apis.io/collections/mathpix/open-mathpix-usage-api/)
+- [Mathpix App Tokens API](https://apis.io/collections/mathpix/postman-mathpix-app-tokens-api/)
+- [Mathpix App Tokens Batches API](https://apis.io/collections/mathpix/postman-mathpix-batches-api/)
+- [Mathpix App Tokens Conversions API](https://apis.io/collections/mathpix/postman-mathpix-conversions-api/)
+- [Mathpix App Tokens Images API](https://apis.io/collections/mathpix/postman-mathpix-images-api/)
+- [Mathpix App Tokens Strokes API](https://apis.io/collections/mathpix/postman-mathpix-strokes-api/)
+- [Mathpix App Tokens Usage API](https://apis.io/collections/mathpix/postman-mathpix-usage-api/)
 
-- Conversion
-- Markdown
-- DOCX
-- LaTeX
-- PDF
-- PPTX
+#### Governance rules (2)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [Documentation](https://docs.mathpix.com/reference/post-v3-converter)
-- [OpenAPI](openapi/mathpix-convert-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mathpix-convert-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mathpix-convert-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Example](examples/mathpix-convert-markdown-example.json)
+- [Mathpix — jsonschema rules](https://apis.io/rules/mathpix/mathpix-jsonschema-spectral-rules/)
+- [Mathpix API Rules](https://apis.io/rules/mathpix/mathpix-rules/)
 
-### Mathpix Batch API
+#### Security (2)
 
-Submit many image URLs (with optional per-image options) in a single v3/batch request, poll once per ~5 images, and retrieve a results map keyed by caller-defined identifiers. Supports optional webhook callbacks.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.mathpix.com/reference/post-v3-batch](https://docs.mathpix.com/reference/post-v3-batch)
+- [Mathpix Authentication](https://apis.io/security/mathpix/mathpix-authentication/)
+- [Mathpix Domain Security](https://apis.io/security/mathpix/mathpix-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Batch
-- OCR
-- Images
+Published plans, tiers and prices.
 
-#### Properties
+- [Mathpix Plans Pricing](https://apis.io/plans/mathpix/mathpix-plans-pricing/)
 
-- [Documentation](https://docs.mathpix.com/reference/post-v3-batch)
-- [OpenAPI](openapi/mathpix-batch-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mathpix-batch-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mathpix-batch-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Example](examples/mathpix-batch-example.json)
+#### Rate limits (1)
 
-### Mathpix Strokes API
+Published request limits.
 
-Recognize handwritten math, text, and chemistry from raw stroke coordinates (x/y arrays) via v3/strokes. Pairs with the App Tokens API and strokes_session_id for client-side digital-ink capture in browsers and tablets.
+- [Mathpix Rate Limits](https://apis.io/rate-limits/mathpix/mathpix-rate-limits/)
 
-- **Human URL:** [https://docs.mathpix.com/reference/post-v3-strokes](https://docs.mathpix.com/reference/post-v3-strokes)
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Handwriting
-- Digital Ink
-- OCR
-- STEM
+- [Mathpix Finops](https://apis.io/finops/mathpix/mathpix-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.mathpix.com/reference/post-v3-strokes)
-- [OpenAPI](openapi/mathpix-strokes-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mathpix-strokes-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mathpix-strokes-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Example](examples/mathpix-strokes-example.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Mathpix App Tokens API
-
-Mint short-lived client-side app_token credentials (30 seconds to 12 hours; 5 minutes by default) so browsers, mobile clients, and digital-ink surfaces can call Mathpix without exposing the long-lived app_key. Token issuance is free.
-
-- **Human URL:** [https://docs.mathpix.com/reference/post-v3-app-tokens](https://docs.mathpix.com/reference/post-v3-app-tokens)
-
-#### Tags
-
-- Authentication
-- Tokens
-- Security
-
-#### Properties
-
-- [Documentation](https://docs.mathpix.com/reference/post-v3-app-tokens)
-- [OpenAPI](openapi/mathpix-app-tokens-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mathpix-app-tokens-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mathpix-app-tokens-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Mathpix OCR Usage API
-
-Query OCR consumption metrics aggregated by usage_type, request_args_hash, or app_id, over arbitrary timespans (hour, day, week, month). Used to track consumption trends and reconcile billing.
-
-- **Human URL:** [https://docs.mathpix.com/reference/ocr-usage](https://docs.mathpix.com/reference/ocr-usage)
-
-#### Tags
-
-- Usage
-- Metering
-- FinOps
-- Administration
-
-#### Properties
-
-- [Documentation](https://docs.mathpix.com/reference/ocr-usage)
-- [OpenAPI](openapi/mathpix-ocr-usage-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mathpix-ocr-usage-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mathpix-ocr-usage-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/mathpix)
-- [Twitter](https://twitter.com/MathpixApp)
-- [Git Hub](https://github.com/Mathpix)
-- [Portal](https://docs.mathpix.com)
+- [Website](https://www.mathpix.com/)
 - [Documentation](https://docs.mathpix.com/reference/introduction)
-- [Documentation](https://docs.mathpix.com/guides/authentication)
 - [Pricing](https://mathpix.com/pricing)
-- [Sign Up](https://accounts.mathpix.com/signup)
-- [Login](https://accounts.mathpix.com/login)
-- [Console](https://console.mathpix.com)
 - [Blog](https://mathpix.com/blog)
-- [Support](mailto:support@mathpix.com)
-- [Contact Sales](https://mathpix.com/contact-sales)
-- [Terms of Service](https://mathpix.com/terms-of-service)
-- [Privacy Policy](https://mathpix.com/privacy)
-- [SDK](https://github.com/Mathpix/mpxpy)
-- [SDK](https://github.com/Mathpix/ios-client)
-- [C L I](https://github.com/Mathpix/mpx-cli)
-- [Samples](https://github.com/Mathpix/api-examples)
-- [Tools](https://github.com/Mathpix/mathpix-markdown-it)
-- [Tools](https://github.com/Mathpix/vscode-mathpix-markdown)
-- [Tools](https://github.com/Mathpix/PDF_Accessibility)
-- [Application](https://snip.mathpix.com)
-- [Application](https://snip.mathpix.com/download)
-- [Application](https://chromewebstore.google.com/detail/mathpix-snipping-tool/)
-- [Plans](plans/mathpix-plans-pricing.yml)
-- [Rate Limits](rate-limits/mathpix-rate-limits.yml)
-- [Fin Ops](finops/mathpix-finops.yml)
-- [Vocabulary](vocabulary/mathpix-vocabulary.yml)
-- [Spectral Rules](rules/mathpix-rules.yml)
-- [JSON-LD](json-ld/mathpix-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Terms of service](https://mathpix.com/terms-of-service)
+- [Privacy policy](https://mathpix.com/privacy)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** info@apievangelist.com
+**Kin Score 51.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 59.2 |
+| Contract governance | 27.3 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 60.7 |
+| Access clarity | 67.1 |
+
+**Agent readiness 20.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 19.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/mathpix/](https://apis.io/providers/mathpix/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Mathpix: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/mathpix/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
